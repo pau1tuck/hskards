@@ -7,7 +7,7 @@
             "dom.iterable",
             "esnext"
         ],
-        "outDir": "./static/hskards",
+        "outDir": "./static/hskards/js",
         "baseUrl": "./src",
         "paths": {
             "~*": [

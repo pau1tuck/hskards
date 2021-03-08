@@ -5,9 +5,10 @@
     "author": "Paul Tuck @pau1tuck",
     "license": "MIT",
     "scripts": {
-        "start": "esbuild src/index.tsx --bundle '--define:process.env.NODE_ENV=\"development\"' --outfile=static/hskards/index.js --color=true",
-        "build": "esbuild src/index.tsx --bundle '--define:process.env.NODE_ENV=\"production\"' --minify --outfile=static/hskards/index.js",
-        "gen": "graphql-codegen --config codegen.yml"
+        "start": "esbuild src/index.tsx --bundle '--define:process.env.NODE_ENV=\"development\"' --outfile=static/hskards/js/index.js --color=true",
+        "build": "esbuild src/js/index.tsx --bundle '--define:process.env.NODE_ENV=\"production\"' --minify --outfile=static/hskards/index.js",
+        "gen:graphql": "graphql-codegen --config codegen.yml",
+        "gen:theme-typings": "chakra-cli tokens styles/theme.ts"
     },
     "dependencies": {
         "@apollo/client": "^3.3.11",
@@ -25,6 +26,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.13.8",
+        "@chakra-ui/cli": "^1.2.1",
         "@graphql-codegen/cli": "^1.21.1",
         "@graphql-codegen/typescript": "^1.21.0",
         "@graphql-codegen/typescript-operations": "^1.17.14",
