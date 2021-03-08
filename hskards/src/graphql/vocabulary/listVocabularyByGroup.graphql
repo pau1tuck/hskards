@@ -1,0 +1,11 @@
+query ListVocabularyByGroup($id: Number!) {
+    vocabularyGroup(id: $id) {
+        id
+        lessonId
+        character {
+            simplifiedChinese
+            pinyin
+            english
+        }
+    }
+}
