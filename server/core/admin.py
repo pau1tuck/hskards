@@ -6,7 +6,7 @@ class VocabularyAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Chinese', {'fields':  ['simplified_chinese',
                                  'traditional_chinese']}),
-        ('Pinyin', {'fields': ['pinyin', 'pin_num', 'pin_plain']})
+        ('Pinyin', {'fields': ['pinyin', 'pin_num', 'pin_plain']}),
         ('English', {'fields':  ['english']}),
     ]
     list_display = ('simplified_chinese', 'pinyin', 'english')

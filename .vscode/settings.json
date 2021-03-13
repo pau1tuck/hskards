@@ -1,3 +1,21 @@
 {
-    "python.pythonPath": "env/bin/python3"
+    "python.pythonPath": "env/bin/python",
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": false,
+                    "requestCert": false
+                }
+            },
+            "previewLimit": 50,
+            "server": "ec2-18-214-208-89.compute-1.amazonaws.com",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "HSKIT PostgreSQL",
+            "database": "dcm358emeom6li",
+            "username": "igyoxwtmvuggfb",
+            "password": "d3c7ac50b975daa10d3fd67f8c5b5a1487d5c939d489ed9ccbcd454d1d3b8548"
+        }
+    ]
 }
