@@ -2,7 +2,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/django,react
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,react
 
-.vscode/
+.vscode
 .vscode/settings.json
 
 ### Django ###
