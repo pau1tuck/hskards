@@ -33739,11 +33739,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }
     margin-right: 7px;
 `;
-  var Button_Chinese = styled_components_browser_esm_default.section`
+  var ControlPanelButton_Chinese = styled_components_browser_esm_default.div`
     display: flex;
     width: 100%;
     height: 50px;
-    margin-top: 5px;
+    margin-top: 3px;
     padding-right: 1px;
     align-items: center;
     justify-content: center;
@@ -33754,6 +33754,29 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     font-family: "Noto Sans SC";
     font-weight: 700;
     cursor: pointer;
+    &:hover {
+        background-color: #007fd9;
+    }
+`;
+  var ControlPanelButton_English = styled_components_browser_esm_default.div`
+    display: flex;
+    width: 100%;
+    height: 50px;
+    margin-top: 3px;
+    padding-right: 1px;
+    padding-bottom: 3px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 3px;
+    background-color: #0095ff;
+    color: #fff;
+    font-family: "Ubuntu";
+    font-weight: 700;
+    cursor: pointer;
+    &:hover {
+        background-color: #007fd9;
+    }
 `;
   var Flashcard = styled_components_browser_esm_default.section`
     width: 100%;
@@ -33778,8 +33801,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 `;
   var Flashcard_Front = styled_components_browser_esm_default.section`
     position: absolute;
+    display: flex;
     width: 100%;
     height: 100%;
+    padding-bottom: 25px;
     border-radius: 3px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     background-color: #fff;
@@ -33787,25 +33812,40 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     backface-visibility: hidden;
     align-items: center;
     justify-content: center;
-    font-family: ${(props) => props.fontFamily || "Ma Shan Zheng"};
-    font-size: 4rem;
+    font-family: ${(props) => props.fontFamily || "sans-serif"};
+    font-size: 2rem;
+    @media (min-width: 600px) {
+        font-size: 3rem;
+    }
 `;
   var Flashcard_Back = styled_components_browser_esm_default.section`
     position: absolute;
+    display: flex;
     width: 100%;
     height: 100%;
+    padding-bottom: 25px;
     border-radius: 3px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     background-color: #fff;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
     transform: rotateX(180deg);
+    align-items: center;
+    justify-content: center;
+    font-family: ${(props) => props.fontFamily || "sans-serif"};
+    font-size: 2rem;
+    @media (min-width: 600px) {
+        font-size: 3rem;
+    }
 `;
   var Flashcards = () => {
     const [font, setFont] = (0, import_react10.useState)("Noto Sans SC");
-    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(Button_Chinese, null, "\u4E2D\u6587"), /* @__PURE__ */ import_react10.default.createElement(Button_Chinese, null, "EN"), /* @__PURE__ */ import_react10.default.createElement(Button_Chinese, null, "\u62FC\u97F3")), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, {
+    const [cardContent, setCardContent] = (0, import_react10.useState)("\u6C49\u5B57");
+    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton_Chinese, null, "\u6C49\u5B57"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton_Chinese, null, "\u62FC\u97F3"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton_English, null, "EN")), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, {
       fontFamily: font
-    }, "Dog"), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, null, "Shit")))));
+    }, "\u5224\u65AD"), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, {
+      fontFamily: font
+    }, "judge")))));
   };
 
   // src/config/routes.tsx
