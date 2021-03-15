@@ -33715,28 +33715,88 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var Wrapper = styled_components_browser_esm_default.section`
     display: flex;
     width: 100%;
-    height: 300px;
-    margin: 10px;
-    padding-right: 10px;
+    height: 200px;
+    @media (min-width: 600px) {
+        height: 260px;
+    }
     justify-content: center;
     background-color: #f6f7fb;
 `;
+  var AppContainer = styled_components_browser_esm_default.section`
+    display: flex;
+    width: 100%;
+    @media (min-width: 600px) {
+        width: 460px;
+    }
+    margin: 10px;
+    justify-content: center;
+`;
   var ControlPanel = styled_components_browser_esm_default.section`
-    width: 50px;
-    height: 300px;
-    margin-right: 10px;
-    background-color: red;
+    width: 55px;
+    height: 200px;
+    @media (min-width: 600px) {
+        height: 260px;
+    }
+    margin-right: 7px;
+`;
+  var Button_Simplified = styled_components_browser_esm_default.section`
+    display: flex;
+    width: 100%;
+    height: 50px;
+    margin-top: 5px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 3px;
+    background-color: #0095ff;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
 `;
   var Flashcard = styled_components_browser_esm_default.section`
-    min-width: 300px;
-    max-width: 400px;
-    height: 300px;
+    width: 100%;
+    height: 200px;
+    @media (min-width: 600px) {
+        height: 260px;
+    }
+    background-color: transparent;
+    perspective: 1000px;
+`;
+  var Flashcard_Inner = styled_components_browser_esm_default.section`
+    position: relative;
+    width: 100%;
+    height: 100%;
     margin-right: 10px;
-    border-radius: 10px;
-    background-color: white;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    &:hover {
+        transform: rotateX(180deg);
+    }
+`;
+  var Flashcard_Front = styled_components_browser_esm_default.section`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    background-color: #fff;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+`;
+  var Flashcard_Back = styled_components_browser_esm_default.section`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    background-color: #fff;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    transform: rotateX(180deg);
 `;
   var Flashcards = () => {
-    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null));
+    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(Button_Simplified, null, "\u4E2D\u6587"), /* @__PURE__ */ import_react10.default.createElement(Button_Simplified, null, "EN"), /* @__PURE__ */ import_react10.default.createElement(Button_Simplified, null)), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, null, "Dog"), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, null, "Shit")))));
   };
 
   // src/config/routes.tsx
