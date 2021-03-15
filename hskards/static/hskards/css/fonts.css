@@ -1,0 +1,95 @@
+@font-face {
+    font-family: "Ubuntu";
+    src: url("../fonts/Ubuntu-Regular.eot");
+    src: url("../fonts/Ubuntu-Regular.eot") format("embedded-opentype"),
+        url("../fonts/Ubuntu-Regular.woff") format("woff"),
+        url("../fonts/Ubuntu-Regular.woff2") format("woff2"),
+        url("../fonts/Ubuntu-Regular.ttf") format("truetype"),
+        url("../fonts/Ubuntu-Regular.svg") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url("../fonts/Ubuntu-SemiBold.eot");
+    src: url("../fonts/Ubuntu-SemiBold.eot") format("embedded-opentype"),
+        url("../fonts/Ubuntu-SemiBold.woff") format("woff"),
+        url("../fonts/Ubuntu-SemiBold.woff2") format("woff2"),
+        url("../fonts/Ubuntu-SemiBold.ttf") format("truetype"),
+        url("../fonts/Ubuntu-SemiBold.svg") format("svg");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url("../fonts/Ubuntu-Bold.eot");
+    src: url("../fonts/Ubuntu-Bold.eot") format("embedded-opentype"),
+        url("../fonts/Ubuntu-Bold.woff") format("woff"),
+        url("../fonts/Ubuntu-Bold.woff2") format("woff2"),
+        url("../fonts/Ubuntu-Bold.ttf") format("truetype"),
+        url("../fonts/Ubuntu-Bold.svg") format("svg");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Quicksand";
+    src: url("../fonts/Quicksand-Bold.eot");
+    src: url("../fonts/Quicksand-Bold.eot") format("embedded-opentype"),
+        url("../fonts/Quicksand-Bold.woff") format("woff"),
+        url("../fonts/Quicksand-Bold.woff2") format("woff2"),
+        url("../fonts/Quicksand-Bold.ttf") format("truetype"),
+        url("../fonts/Quicksand-Bold.svg") format("svg");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Noto Sans SC";
+    src: url("../fonts/NotoSansSC-Regular.eot");
+    src: url("../fonts/NotoSansSC-Regular.eot") format("embedded-opentype"),
+        url("../fonts/NotoSansSC-Regular.woff") format("woff"),
+        url("../fonts/NotoSansSC-Regular.woff2") format("woff2"),
+        url("../fonts/NotoSansSC-Regular.ttf") format("truetype"),
+        url("../fonts/NotoSansSC-Regular.svg") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Noto Sans SC";
+    src: url("../fonts/NotoSansSC-Medium.eot");
+    src: url("../fonts/NotoSansSC-Medium.eot") format("embedded-opentype"),
+        url("../fonts/NotoSansSC-Medium.woff") format("woff"),
+        url("../fonts/NotoSansSC-Medium.woff2") format("woff2"),
+        url("../fonts/NotoSansSC-Medium.ttf") format("truetype"),
+        url("../fonts/NotoSansSC-Medium.svg") format("svg");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Noto Sans SC";
+    src: url("../fonts/NotoSansSC-Bold.eot");
+    src: url("../fonts/NotoSansSC-Bold.eot") format("embedded-opentype"),
+        url("../fonts/NotoSansSC-Bold.woff") format("woff"),
+        url("../fonts/NotoSansSC-Bold.woff2") format("woff2"),
+        url("../fonts/NotoSansSC-Bold.ttf") format("truetype"),
+        url("../fonts/NotoSansSC-Bold.svg") format("svg");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Ma Shan Zheng";
+    src: url("../fonts/MaShanZheng-Regular.eot");
+    src: url("../fonts/MaShanZheng-Regular.eot") format("embedded-opentype"),
+        url("../fonts/MaShanZheng-Regular.woff") format("woff"),
+        url("../fonts/MaShanZheng-Regular.woff2") format("woff2"),
+        url("../fonts/MaShanZheng-Regular.ttf") format("truetype"),
+        url("../fonts/MaShanZheng-Regular.svg") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}

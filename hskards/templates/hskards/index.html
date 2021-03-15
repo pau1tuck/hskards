@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
     <head>
         <meta charset="UTF-8" />
         <meta
@@ -7,9 +8,9 @@
             content="minimum-scale=1, initial-scale=1, width=device-width"
         />
         <title>Vocabulary Training</title>
+        <link rel="stylesheet" href="{%static 'hskards/css/fonts.css' %}" />
     </head>
     <body>
-        {% load static %}
         <div id="root"></div>
 
         <script src="{% static 'hskards/js/index.js' %}"></script>
