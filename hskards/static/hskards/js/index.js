@@ -33712,6 +33712,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 
   // src/modules/flashcards/index.tsx
   var import_react10 = __toModule(require_react());
+
+  // src/modules/flashcards/styles.tsx
   var Wrapper = styled_components_browser_esm_default.section`
     display: flex;
     width: 100%;
@@ -33739,39 +33741,20 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }
     margin-right: 7px;
 `;
-  var ControlPanelButton_Chinese = styled_components_browser_esm_default.div`
+  var ControlPanelButton = styled_components_browser_esm_default.div`
     display: flex;
     width: 100%;
     height: 50px;
     margin-top: 3px;
     padding-right: 1px;
+    padding-bottom: ${(props) => props.english ? "3px" : 0};
     align-items: center;
     justify-content: center;
     text-align: center;
     border-radius: 3px;
     background-color: #0095ff;
     color: #fff;
-    font-family: "Noto Sans SC";
-    font-weight: 700;
-    cursor: pointer;
-    &:hover {
-        background-color: #007fd9;
-    }
-`;
-  var ControlPanelButton_English = styled_components_browser_esm_default.div`
-    display: flex;
-    width: 100%;
-    height: 50px;
-    margin-top: 3px;
-    padding-right: 1px;
-    padding-bottom: 3px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 3px;
-    background-color: #0095ff;
-    color: #fff;
-    font-family: "Ubuntu";
+    font-family: ${(props) => props.english ? "Ubuntu" : "Noto Sans SC"};
     font-weight: 700;
     cursor: pointer;
     &:hover {
@@ -33838,12 +33821,17 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         font-size: 3rem;
     }
 `;
+
+  // src/modules/flashcards/index.tsx
   var Flashcards = () => {
+    const [mode2, setMode] = (0, import_react10.useState)("simplified");
     const [font, setFont] = (0, import_react10.useState)("Noto Sans SC");
     const [cardContent, setCardContent] = (0, import_react10.useState)("\u6C49\u5B57");
-    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton_Chinese, null, "\u6C49\u5B57"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton_Chinese, null, "\u62FC\u97F3"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton_English, null, "EN")), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, {
+    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, null, "\u6C49\u5B57"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, null, "\u62FC\u97F3"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
+      english: true
+    }, "EN")), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, {
       fontFamily: font
-    }, "\u5224\u65AD"), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, {
+    }, cardContent), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, {
       fontFamily: font
     }, "judge")))));
   };
