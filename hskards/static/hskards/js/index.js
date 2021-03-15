@@ -1058,7 +1058,7 @@
           }
           return dispatcher.useContext(Context, unstable_observedBits);
         }
-        function useState2(initialState) {
+        function useState3(initialState) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useState(initialState);
         }
@@ -1646,7 +1646,7 @@
         exports.useMemo = useMemo2;
         exports.useReducer = useReducer;
         exports.useRef = useRef2;
-        exports.useState = useState2;
+        exports.useState = useState3;
         exports.version = ReactVersion;
       })();
     }
@@ -33739,17 +33739,19 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }
     margin-right: 7px;
 `;
-  var Button_Simplified = styled_components_browser_esm_default.section`
+  var Button_Chinese = styled_components_browser_esm_default.section`
     display: flex;
     width: 100%;
     height: 50px;
     margin-top: 5px;
+    padding-right: 1px;
     align-items: center;
     justify-content: center;
     text-align: center;
     border-radius: 3px;
     background-color: #0095ff;
     color: #fff;
+    font-family: "Noto Sans SC";
     font-weight: 700;
     cursor: pointer;
 `;
@@ -33783,6 +33785,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     background-color: #fff;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
+    align-items: center;
+    justify-content: center;
+    font-family: ${(props) => props.fontFamily || "Ma Shan Zheng"};
+    font-size: 4rem;
 `;
   var Flashcard_Back = styled_components_browser_esm_default.section`
     position: absolute;
@@ -33796,7 +33802,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     transform: rotateX(180deg);
 `;
   var Flashcards = () => {
-    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(Button_Simplified, null, "\u4E2D\u6587"), /* @__PURE__ */ import_react10.default.createElement(Button_Simplified, null, "EN"), /* @__PURE__ */ import_react10.default.createElement(Button_Simplified, null)), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, null, "Dog"), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, null, "Shit")))));
+    const [font, setFont] = (0, import_react10.useState)("Noto Sans SC");
+    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(Button_Chinese, null, "\u4E2D\u6587"), /* @__PURE__ */ import_react10.default.createElement(Button_Chinese, null, "EN"), /* @__PURE__ */ import_react10.default.createElement(Button_Chinese, null, "\u62FC\u97F3")), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, {
+      fontFamily: font
+    }, "Dog"), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, null, "Shit")))));
   };
 
   // src/config/routes.tsx

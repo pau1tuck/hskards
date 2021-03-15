@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+
+interface FontFamilyProps {
+    readonly fontFamily: string;
+}
 
 const Wrapper = styled.section`
     display: flex;
@@ -31,17 +35,19 @@ const ControlPanel = styled.section`
     margin-right: 7px;
 `;
 
-const Button_Simplified = styled.section`
+const Button_Chinese = styled.section`
     display: flex;
     width: 100%;
     height: 50px;
     margin-top: 5px;
+    padding-right: 1px;
     align-items: center;
     justify-content: center;
     text-align: center;
     border-radius: 3px;
     background-color: #0095ff;
     color: #fff;
+    font-family: "Noto Sans SC";
     font-weight: 700;
     cursor: pointer;
 `;
@@ -69,7 +75,7 @@ const Flashcard_Inner = styled.section`
     }
 `;
 
-const Flashcard_Front = styled.section`
+const Flashcard_Front = styled.section<FontFamilyProps>`
     position: absolute;
     width: 100%;
     height: 100%;
@@ -78,6 +84,10 @@ const Flashcard_Front = styled.section`
     background-color: #fff;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
+    align-items: center;
+    justify-content: center;
+    font-family: ${(props) => props.fontFamily || "Ma Shan Zheng"};
+    font-size: 4rem;
 `;
 
 const Flashcard_Back = styled.section`
@@ -93,17 +103,18 @@ const Flashcard_Back = styled.section`
 `;
 
 export const Flashcards = () => {
+    const [font, setFont] = useState("Noto Sans SC");
     return (
         <Wrapper>
             <AppContainer>
                 <ControlPanel>
-                    <Button_Simplified>中文</Button_Simplified>
-                    <Button_Simplified>EN</Button_Simplified>
-                    <Button_Simplified>拼音</Button_Simplified>
+                    <Button_Chinese>中文</Button_Chinese>
+                    <Button_Chinese>EN</Button_Chinese>
+                    <Button_Chinese>拼音</Button_Chinese>
                 </ControlPanel>
                 <Flashcard>
                     <Flashcard_Inner>
-                        <Flashcard_Front>Dog</Flashcard_Front>
+                        <Flashcard_Front fontFamily={font}>Dog</Flashcard_Front>
                         <Flashcard_Back>Shit</Flashcard_Back>
                     </Flashcard_Inner>
                 </Flashcard>
