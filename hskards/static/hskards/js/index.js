@@ -33878,38 +33878,35 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 
   // src/modules/flashcards/index.tsx
   var Flashcards = () => {
-    const [card, setcard] = (0, import_react10.useState)([]);
-    const [cardContent, setCardContent] = (0, import_react10.useState)([]);
-    let vocabulary = [];
-    (0, import_react10.useEffect)(() => {
-      let randomOrder = [];
-      const newSequence = (n3) => {
-        while (randomOrder.length < n3) {
-          let rnd = Math.floor(Math.random() * n3);
-          if (randomOrder.indexOf(rnd) === -1)
-            randomOrder.push(rnd);
-        }
-      };
-      const shufflecard = () => {
-        newSequence(data.length);
-        for (let i3 = 0; i3 < data.length; i3++) {
-          vocabulary.push(data[randomOrder[i3]]);
-        }
-      };
-      shufflecard();
-      setcard(vocabulary[0]);
-    }, []);
-    console.log(card);
     const [mode2, setMode] = (0, import_react10.useState)("simplified");
+    const [card, setcard] = (0, import_react10.useState)([]);
     const [currentCardNumber, setCurrentCardNumber] = (0, import_react10.useState)(0);
+    const [name, setName] = (0, import_react10.useState)("Cat");
+    const [cardContent, setCardContent] = (0, import_react10.useState)(data[currentCardNumber].simplified);
+    let simplified = [];
+    let pinyin = [];
+    let english = [];
+    let vocabulary = [];
     const [font, setFont] = (0, import_react10.useState)("Noto Sans SC");
+    const modeSimplified = () => {
+    };
+    const modePinyin = () => {
+    };
+    const modeEnglish = () => {
+      setCardContent(data[currentCardNumber].english);
+    };
+    const cardNext = () => {
+    };
+    const cardPrevious = () => {
+    };
     return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, null, "\u6C49\u5B57"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, null, "\u62FC\u97F3"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
-      english: true
+      english: true,
+      onClick: modeEnglish
     }, "EN")), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, {
       fontFamily: font
-    }, card.simplified), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, {
+    }, cardContent), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, {
       fontFamily: font
-    }, "Chinese")))));
+    }, cardContent)))));
   };
 
   // src/config/routes.tsx
