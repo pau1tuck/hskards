@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'cacheops',
+    'django_pickling',
     'graphene_django',
     'server.core',
     'server.users',
@@ -119,3 +121,19 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CACHEOPS_REDIS = {
+    'host': config('REDIS_HOST'),
+    'port': config('REDIS_PORT'),
+    'db': 2,
+    'socket_timeout': 3,   # connection timeout in seconds, optional
+    'password': config('REDIS_PASS'),
+    # 'unix_socket_path': ''  # replaces host and port
+}
+CACHEOPS_PREFIX = 'hskit_app'
+CACHEOPS_DEGRADE_ON_FAILURE = True
+CACHEOPS = {
+    'auth.user': {'ops': 'get', 'timeout': 60*15},
+    'server.core.vocabulary_group': {'ops': 'all', 'timeout': 60*60*24},
+    'server.core.vocabulary': {'ops': 'all', 'timeout': 60*60*24, 'local_get': True},
+}

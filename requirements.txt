@@ -2,7 +2,10 @@ aniso8601==7.0.0
 asgiref==3.3.1
 autopep8==1.5.5
 Django==3.1.7
+django-cacheops==5.1
 django-cors-headers==3.7.0
+django-pickling==1.0
+funcy==1.15
 graphene==2.1.8
 graphene-django==2.15.0
 graphql-core==2.3.2
@@ -12,6 +15,7 @@ psycopg2==2.8.6
 pycodestyle==2.6.0
 python-decouple==3.4
 pytz==2021.1
+redis==3.5.3
 Rx==1.6.1
 singledispatch==3.6.1
 six==1.15.0

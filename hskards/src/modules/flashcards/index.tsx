@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Wrapper,
     AppContainer,
@@ -11,10 +11,39 @@ import {
 } from "./styles";
 import { data } from "./dummy-data";
 
-export const Flashcards = () => {
+export const Flashcards: React.FC = () => {
     const [mode, setMode] = useState("simplified");
+    const [card, setcard] = useState<any[]>([]);
+
+    let vocabulary: any = [];
+    useEffect(() => {
+        let randomOrder: number[] = [];
+        const newSequence = (n: number) => {
+            while (randomOrder.length < n) {
+                let rnd = Math.floor(Math.random() * n);
+                if (randomOrder.indexOf(rnd) === -1) randomOrder.push(rnd);
+            }
+        };
+        const shufflecard = () => {
+            newSequence(data.length);
+            for (let i = 0; i < data.length; i++) {
+                vocabulary.push(data[randomOrder[i]]);
+            }
+        };
+        shufflecard();
+        setcard(vocabulary[0]);
+    }, []);
+
+    console.log(card);
+    const [currentCardNumber, setCurrentCardNumber] = useState(0);
     const [font, setFont] = useState("Noto Sans SC");
-    const [cardContent, setCardContent] = useState("汉字");
+
+    const modeSimplified = () => {};
+    const modePinyin = () => {};
+    const modeEnglish = () => {};
+
+    const cardNext = () => {};
+    const cardPrevious = () => {};
 
     return (
         <Wrapper>
@@ -22,12 +51,14 @@ export const Flashcards = () => {
                 <ControlPanel>
                     <ControlPanelButton>汉字</ControlPanelButton>
                     <ControlPanelButton>拼音</ControlPanelButton>
-                    <ControlPanelButton english>EN</ControlPanelButton>
+                    <ControlPanelButton english onClick={}>
+                        EN
+                    </ControlPanelButton>
                 </ControlPanel>
                 <Flashcard>
                     <Flashcard_Inner>
                         <Flashcard_Front fontFamily={font}>
-                            {cardContent}
+                            {card.simplified}
                         </Flashcard_Front>
                         <Flashcard_Back fontFamily={font}>
                             Chinese

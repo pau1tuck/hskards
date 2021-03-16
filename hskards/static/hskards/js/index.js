@@ -1070,7 +1070,7 @@
           var dispatcher = resolveDispatcher();
           return dispatcher.useRef(initialValue);
         }
-        function useEffect2(create, deps) {
+        function useEffect3(create, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useEffect(create, deps);
         }
@@ -1640,7 +1640,7 @@
         exports.useCallback = useCallback2;
         exports.useContext = useContext7;
         exports.useDebugValue = useDebugValue;
-        exports.useEffect = useEffect2;
+        exports.useEffect = useEffect3;
         exports.useImperativeHandle = useImperativeHandle;
         exports.useLayoutEffect = useLayoutEffect2;
         exports.useMemo = useMemo2;
@@ -9713,14 +9713,14 @@
           var depth = 0;
           while (node) {
             if (node.nodeType === COMMENT_NODE) {
-              var data = node.data;
-              if (data === SUSPENSE_END_DATA) {
+              var data2 = node.data;
+              if (data2 === SUSPENSE_END_DATA) {
                 if (depth === 0) {
                   return getNextHydratableSibling(node);
                 } else {
                   depth--;
                 }
-              } else if (data === SUSPENSE_START_DATA || data === SUSPENSE_FALLBACK_START_DATA || data === SUSPENSE_PENDING_START_DATA) {
+              } else if (data2 === SUSPENSE_START_DATA || data2 === SUSPENSE_FALLBACK_START_DATA || data2 === SUSPENSE_PENDING_START_DATA) {
                 depth++;
               }
             }
@@ -9733,14 +9733,14 @@
           var depth = 0;
           while (node) {
             if (node.nodeType === COMMENT_NODE) {
-              var data = node.data;
-              if (data === SUSPENSE_START_DATA || data === SUSPENSE_FALLBACK_START_DATA || data === SUSPENSE_PENDING_START_DATA) {
+              var data2 = node.data;
+              if (data2 === SUSPENSE_START_DATA || data2 === SUSPENSE_FALLBACK_START_DATA || data2 === SUSPENSE_PENDING_START_DATA) {
                 if (depth === 0) {
                   return node;
                 } else {
                   depth--;
                 }
-              } else if (data === SUSPENSE_END_DATA) {
+              } else if (data2 === SUSPENSE_END_DATA) {
                 depth++;
               }
             }
@@ -21374,7 +21374,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       }
       return function(obj, opts) {
         var path = "";
-        var data = obj || {};
+        var data2 = obj || {};
         var options2 = opts || {};
         var encode = options2.pretty ? encodeURIComponentPretty : encodeURIComponent;
         for (var i4 = 0; i4 < tokens2.length; i4++) {
@@ -21383,7 +21383,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             path += token;
             continue;
           }
-          var value = data[token.name];
+          var value = data2[token.name];
           var segment;
           if (value == null) {
             if (token.optional) {
@@ -22135,21 +22135,21 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       return result;
     }
     function hashGet(key) {
-      var data = this.__data__;
+      var data2 = this.__data__;
       if (nativeCreate) {
-        var result = data[key];
+        var result = data2[key];
         return result === HASH_UNDEFINED ? void 0 : result;
       }
-      return hasOwnProperty2.call(data, key) ? data[key] : void 0;
+      return hasOwnProperty2.call(data2, key) ? data2[key] : void 0;
     }
     function hashHas(key) {
-      var data = this.__data__;
-      return nativeCreate ? data[key] !== void 0 : hasOwnProperty2.call(data, key);
+      var data2 = this.__data__;
+      return nativeCreate ? data2[key] !== void 0 : hasOwnProperty2.call(data2, key);
     }
     function hashSet(key, value) {
-      var data = this.__data__;
+      var data2 = this.__data__;
       this.size += this.has(key) ? 0 : 1;
-      data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
+      data2[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
       return this;
     }
     Hash.prototype.clear = hashClear;
@@ -22170,33 +22170,33 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       this.size = 0;
     }
     function listCacheDelete(key) {
-      var data = this.__data__, index2 = assocIndexOf(data, key);
+      var data2 = this.__data__, index2 = assocIndexOf(data2, key);
       if (index2 < 0) {
         return false;
       }
-      var lastIndex = data.length - 1;
+      var lastIndex = data2.length - 1;
       if (index2 == lastIndex) {
-        data.pop();
+        data2.pop();
       } else {
-        splice.call(data, index2, 1);
+        splice.call(data2, index2, 1);
       }
       --this.size;
       return true;
     }
     function listCacheGet(key) {
-      var data = this.__data__, index2 = assocIndexOf(data, key);
-      return index2 < 0 ? void 0 : data[index2][1];
+      var data2 = this.__data__, index2 = assocIndexOf(data2, key);
+      return index2 < 0 ? void 0 : data2[index2][1];
     }
     function listCacheHas(key) {
       return assocIndexOf(this.__data__, key) > -1;
     }
     function listCacheSet(key, value) {
-      var data = this.__data__, index2 = assocIndexOf(data, key);
+      var data2 = this.__data__, index2 = assocIndexOf(data2, key);
       if (index2 < 0) {
         ++this.size;
-        data.push([key, value]);
+        data2.push([key, value]);
       } else {
-        data[index2][1] = value;
+        data2[index2][1] = value;
       }
       return this;
     }
@@ -22233,9 +22233,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       return getMapData(this, key).has(key);
     }
     function mapCacheSet(key, value) {
-      var data = getMapData(this, key), size2 = data.size;
-      data.set(key, value);
-      this.size += data.size == size2 ? 0 : 1;
+      var data2 = getMapData(this, key), size2 = data2.size;
+      data2.set(key, value);
+      this.size += data2.size == size2 ? 0 : 1;
       return this;
     }
     MapCache.prototype.clear = mapCacheClear;
@@ -22244,16 +22244,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     MapCache.prototype.has = mapCacheHas;
     MapCache.prototype.set = mapCacheSet;
     function Stack(entries) {
-      var data = this.__data__ = new ListCache(entries);
-      this.size = data.size;
+      var data2 = this.__data__ = new ListCache(entries);
+      this.size = data2.size;
     }
     function stackClear() {
       this.__data__ = new ListCache();
       this.size = 0;
     }
     function stackDelete(key) {
-      var data = this.__data__, result = data["delete"](key);
-      this.size = data.size;
+      var data2 = this.__data__, result = data2["delete"](key);
+      this.size = data2.size;
       return result;
     }
     function stackGet(key) {
@@ -22263,18 +22263,18 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       return this.__data__.has(key);
     }
     function stackSet(key, value) {
-      var data = this.__data__;
-      if (data instanceof ListCache) {
-        var pairs = data.__data__;
+      var data2 = this.__data__;
+      if (data2 instanceof ListCache) {
+        var pairs = data2.__data__;
         if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
           pairs.push([key, value]);
-          this.size = ++data.size;
+          this.size = ++data2.size;
           return this;
         }
-        data = this.__data__ = new MapCache(pairs);
+        data2 = this.__data__ = new MapCache(pairs);
       }
-      data.set(key, value);
-      this.size = data.size;
+      data2.set(key, value);
+      this.size = data2.size;
       return this;
     }
     Stack.prototype.clear = stackClear;
@@ -22500,8 +22500,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       };
     }
     function getMapData(map, key) {
-      var data = map.__data__;
-      return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
+      var data2 = map.__data__;
+      return isKeyable(key) ? data2[typeof key == "string" ? "string" : "hash"] : data2.map;
     }
     function getNative(object, key) {
       var value = getValue(object, key);
@@ -33822,18 +33822,94 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }
 `;
 
+  // src/modules/flashcards/dummy-data.ts
+  var data = [
+    {
+      simplified: "\u5224\u65AD",
+      pinyin: "p\xE0ndu\xE0n",
+      english: "judge"
+    },
+    {
+      simplified: "\u5BF9\u9519",
+      pinyin: "du\xECcu\xF2",
+      english: "true or false"
+    },
+    {
+      simplified: "\u542C\u8BF4",
+      pinyin: "t\u012Bngshu\u014D",
+      english: "I've heard that"
+    },
+    {
+      simplified: "\u5F53\u5730",
+      pinyin: "d\u0101ngd\xEC",
+      english: "locality"
+    },
+    {
+      simplified: "\u5C11\u6570\u6C11\u65CF",
+      pinyin: "sh\u01CEosh\xF9 m\xEDnz\xFA",
+      english: "ethnic minority"
+    },
+    {
+      simplified: "\u6691\u5047",
+      pinyin: "sh\u01D4ji\xE0",
+      english: "summer vacation"
+    },
+    {
+      simplified: "\u5341\u5206",
+      pinyin: "sh\xEDf\u0113n",
+      english: "extremely"
+    },
+    {
+      simplified: "\u6709\u8DA3",
+      pinyin: "y\u01D2uq\xF9",
+      english: "interesting"
+    },
+    {
+      simplified: "\u7EA6\u4F1A",
+      pinyin: "yu\u0113hu\xEC",
+      english: "appointment; date"
+    },
+    {
+      simplified: "\u52A0\u73ED",
+      pinyin: "ji\u0101b\u0101n",
+      english: "work overtime"
+    }
+  ];
+
   // src/modules/flashcards/index.tsx
   var Flashcards = () => {
+    const [card, setcard] = (0, import_react10.useState)([]);
+    const [cardContent, setCardContent] = (0, import_react10.useState)([]);
+    let vocabulary = [];
+    (0, import_react10.useEffect)(() => {
+      let randomOrder = [];
+      const newSequence = (n3) => {
+        while (randomOrder.length < n3) {
+          let rnd = Math.floor(Math.random() * n3);
+          if (randomOrder.indexOf(rnd) === -1)
+            randomOrder.push(rnd);
+        }
+      };
+      const shufflecard = () => {
+        newSequence(data.length);
+        for (let i3 = 0; i3 < data.length; i3++) {
+          vocabulary.push(data[randomOrder[i3]]);
+        }
+      };
+      shufflecard();
+      setcard(vocabulary[0]);
+    }, []);
+    console.log(card);
     const [mode2, setMode] = (0, import_react10.useState)("simplified");
+    const [currentCardNumber, setCurrentCardNumber] = (0, import_react10.useState)(0);
     const [font, setFont] = (0, import_react10.useState)("Noto Sans SC");
-    const [cardContent, setCardContent] = (0, import_react10.useState)("\u6C49\u5B57");
     return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, null, "\u6C49\u5B57"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, null, "\u62FC\u97F3"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
       english: true
     }, "EN")), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, {
       fontFamily: font
-    }, cardContent), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, {
+    }, card.simplified), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, {
       fontFamily: font
-    }, "judge")))));
+    }, "Chinese")))));
   };
 
   // src/config/routes.tsx
