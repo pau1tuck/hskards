@@ -2633,11 +2633,11 @@
     if (true) {
       (function() {
         "use strict";
-        var React14 = require_react();
+        var React16 = require_react();
         var _assign = require_object_assign();
         var Scheduler = require_scheduler();
         var tracing = require_tracing();
-        var ReactSharedInternals = React14.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var ReactSharedInternals = React16.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         function warn2(format) {
           {
             for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2669,7 +2669,7 @@
             Function.prototype.apply.call(console[level], console, argsWithFormat);
           }
         }
-        if (!React14) {
+        if (!React16) {
           {
             throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
           }
@@ -3885,7 +3885,7 @@
         var didWarnInvalidChild = false;
         function flattenChildren(children) {
           var content = "";
-          React14.Children.forEach(children, function(child) {
+          React16.Children.forEach(children, function(child) {
             if (child == null) {
               return;
             }
@@ -3896,7 +3896,7 @@
         function validateProps(element, props) {
           {
             if (typeof props.children === "object" && props.children !== null) {
-              React14.Children.forEach(props.children, function(child) {
+              React16.Children.forEach(props.children, function(child) {
                 if (child == null) {
                   return;
                 }
@@ -11102,7 +11102,7 @@
         }
         var fakeInternalInstance = {};
         var isArray2 = Array.isArray;
-        var emptyRefsObject = new React14.Component().refs;
+        var emptyRefsObject = new React16.Component().refs;
         var didWarnAboutStateAssignmentForComponent;
         var didWarnAboutUninitializedState;
         var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23878,7 +23878,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   });
 
   // src/index.tsx
-  var import_react13 = __toModule(require_react());
+  var import_react15 = __toModule(require_react());
   var import_react_dom = __toModule(require_react_dom());
 
   // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
@@ -28010,13 +28010,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       if (typeof _cache !== "undefined") {
         if (_cache.has(Class2))
           return _cache.get(Class2);
-        _cache.set(Class2, Wrapper2);
+        _cache.set(Class2, Wrapper);
       }
-      function Wrapper2() {
+      function Wrapper() {
         return _construct(Class2, arguments, _getPrototypeOf(this).constructor);
       }
-      Wrapper2.prototype = Object.create(Class2.prototype, {constructor: {value: Wrapper2, enumerable: false, writable: true, configurable: true}});
-      return _setPrototypeOf2(Wrapper2, Class2);
+      Wrapper.prototype = Object.create(Class2.prototype, {constructor: {value: Wrapper, enumerable: false, writable: true, configurable: true}});
+      return _setPrototypeOf2(Wrapper, Class2);
     };
     return _wrapNativeSuper(Class);
   }
@@ -32573,7 +32573,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
 
   // src/components/_app.tsx
-  var import_react12 = __toModule(require_react());
+  var import_react14 = __toModule(require_react());
 
   // node_modules/styled-components/dist/styled-components.browser.esm.js
   var import_react_is2 = __toModule(require_react_is4());
@@ -33711,10 +33711,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var styled_components_browser_esm_default = qe;
 
   // src/modules/flashcards/index.tsx
-  var import_react10 = __toModule(require_react());
+  var import_react12 = __toModule(require_react());
 
   // src/modules/flashcards/styles.tsx
-  var Wrapper = styled_components_browser_esm_default.section`
+  var Container = styled_components_browser_esm_default.section`
     display: flex;
     width: 100%;
     height: 200px;
@@ -33748,15 +33748,59 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     height: 50px;
     margin-top: 3px;
     padding-right: 1px;
-    padding-bottom: ${(props) => props.english ? "3px" : 0};
+    padding-bottom: 1px;
+    padding-left: ${(props) => props.english || props.settings ? "1px" : "0"};
     align-items: center;
     justify-content: center;
     text-align: center;
-    border-radius: 5px;
-    background-color: #0095ff;
+    border-radius: 3px;
+    background-color: ${(props) => props.settings ? "#2F4F4F" : "#0095ff"};
     color: #fff;
     font-family: ${(props) => props.english ? "Ubuntu" : "Noto Sans SC"};
     font-weight: 700;
+    font-size: ${(props) => props.settings ? "1.6rem" : "1rem"};
+    cursor: pointer;
+    &:hover {
+        background-color: ${(props) => props.settings ? "#253f3f" : "#007fd9"};
+    }
+`;
+  var ButtonSimplified = styled_components_browser_esm_default.div`
+    display: flex;
+    width: 100%;
+    height: 50px;
+    margin-top: 3px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 3px;
+    background-color: #005089;
+    color: #fff;
+    font-family: "Noto Sans SC";
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    &:hover {
+        background-color: #007fd9;
+    }
+`;
+  var ButtonPinyin = styled_components_browser_esm_default.div`
+    display: flex;
+    width: 100%;
+    height: 50px;
+    margin-top: 3px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 3px;
+    background-color: #008b8b;
+    color: #fff;
+    font-family: "Noto Sans SC";
+    font-weight: 700;
+    font-size: 1rem;
     cursor: pointer;
     &:hover {
         background-color: #007fd9;
@@ -33788,7 +33832,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     display: flex;
     width: 100%;
     height: 100%;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     border-radius: 10px;
     // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     box-shadow: 0 0.25rem 1rem 0 rgb(0 0 0 / 16%);
@@ -33797,8 +33841,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     backface-visibility: hidden;
     align-items: center;
     justify-content: center;
-    font-family: ${(props) => props.font.fontFamily || "sans-serif"};
-    font-size: ${(props) => props.font.fontSize};
+    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
+    font-size: ${(props) => props.style.fontSize};
     font-weight: 400;
     color: #202020;
 `;
@@ -33816,19 +33860,126 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     transform: rotateX(180deg);
     align-items: center;
     justify-content: center;
-    font-family: ${(props) => props.font.fontFamily || "sans-serif"};
+    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
     font-size: 2rem;
     @media (min-width: 600px) {
         font-size: 3rem;
     }
 `;
   var NavigationPanel = styled_components_browser_esm_default.section`
-    width: 407px;
+    display: flex;
+    width: 445px;
     height: 40px;
     margin-top: 18px;
-    margin-left: 54px;
-    background-color: lightblue;
+    margin-left: 55px;
 `;
+  var NavigationButton = styled_components_browser_esm_default.div`
+    display: flex;
+    width: 220px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    font-family: "Noto Sans SC";
+    font-weight: 700;
+    font-size: 1.2rem;
+    background-color: #0095ff;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+        background-color: #007fd9;
+    }
+`;
+  var Spacer = styled_components_browser_esm_default.div`
+    flex-grow: 1;
+`;
+
+  // node_modules/react-icons/lib/esm/iconBase.js
+  var import_react11 = __toModule(require_react());
+
+  // node_modules/react-icons/lib/esm/iconContext.js
+  var import_react10 = __toModule(require_react());
+  var DefaultContext = {
+    color: void 0,
+    size: void 0,
+    className: void 0,
+    style: void 0,
+    attr: void 0
+  };
+  var IconContext = import_react10.default.createContext && import_react10.default.createContext(DefaultContext);
+
+  // node_modules/react-icons/lib/esm/iconBase.js
+  var __assign = function() {
+    __assign = Object.assign || function(t4) {
+      for (var s2, i3 = 1, n3 = arguments.length; i3 < n3; i3++) {
+        s2 = arguments[i3];
+        for (var p2 in s2)
+          if (Object.prototype.hasOwnProperty.call(s2, p2))
+            t4[p2] = s2[p2];
+      }
+      return t4;
+    };
+    return __assign.apply(this, arguments);
+  };
+  var __rest = function(s2, e3) {
+    var t4 = {};
+    for (var p2 in s2)
+      if (Object.prototype.hasOwnProperty.call(s2, p2) && e3.indexOf(p2) < 0)
+        t4[p2] = s2[p2];
+    if (s2 != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i3 = 0, p2 = Object.getOwnPropertySymbols(s2); i3 < p2.length; i3++) {
+        if (e3.indexOf(p2[i3]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p2[i3]))
+          t4[p2[i3]] = s2[p2[i3]];
+      }
+    return t4;
+  };
+  function Tree2Element(tree) {
+    return tree && tree.map(function(node, i3) {
+      return import_react11.default.createElement(node.tag, __assign({
+        key: i3
+      }, node.attr), Tree2Element(node.child));
+    });
+  }
+  function GenIcon(data2) {
+    return function(props) {
+      return import_react11.default.createElement(IconBase, __assign({
+        attr: __assign({}, data2.attr)
+      }, props), Tree2Element(data2.child));
+    };
+  }
+  function IconBase(props) {
+    var elem = function(conf) {
+      var attr = props.attr, size2 = props.size, title = props.title, svgProps = __rest(props, ["attr", "size", "title"]);
+      var computedSize = size2 || conf.size || "1em";
+      var className;
+      if (conf.className)
+        className = conf.className;
+      if (props.className)
+        className = (className ? className + " " : "") + props.className;
+      return import_react11.default.createElement("svg", __assign({
+        stroke: "currentColor",
+        fill: "currentColor",
+        strokeWidth: "0"
+      }, conf.attr, attr, svgProps, {
+        className,
+        style: __assign(__assign({
+          color: props.color || conf.color
+        }, conf.style), props.style),
+        height: computedSize,
+        width: computedSize,
+        xmlns: "http://www.w3.org/2000/svg"
+      }), title && import_react11.default.createElement("title", null, title), props.children);
+    };
+    return IconContext !== void 0 ? import_react11.default.createElement(IconContext.Consumer, null, function(conf) {
+      return elem(conf);
+    }) : elem(DefaultContext);
+  }
+
+  // node_modules/react-icons/md/index.esm.js
+  function MdSettings(props) {
+    return GenIcon({tag: "svg", attr: {viewBox: "0 0 24 24"}, child: [{tag: "path", attr: {d: "M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"}}]})(props);
+  }
 
   // src/modules/flashcards/dummy-data.ts
   var data = [
@@ -33902,45 +34053,48 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       }
     };
     shuffleCards();
-    return /* @__PURE__ */ import_react10.default.createElement(FlashcardApp, {
+    return /* @__PURE__ */ import_react12.default.createElement(FlashcardApp, {
       deck
     });
   };
   var FlashcardApp = ({deck}) => {
-    const [currentCardNumber, setCurrentCardNumber] = (0, import_react10.useState)(0);
-    const [cardContent, setCardContent] = (0, import_react10.useState)(deck[currentCardNumber].simplified);
-    const [font, setFont] = (0, import_react10.useState)({
+    const [currentCardNumber, setCurrentCardNumber] = (0, import_react12.useState)(0);
+    const [cardContent, setCardContent] = (0, import_react12.useState)(deck[currentCardNumber].simplified);
+    const [style, setStyle] = (0, import_react12.useState)({
       fontFamily: "Noto Sans SC",
       fontSize: "3.3rem"
     });
     const modeSimplified = () => {
       setCardContent(deck[currentCardNumber].simplified);
-      setFont({fontFamily: "Noto Sans SC", fontSize: "3.3rem"});
+      setStyle({fontFamily: "Noto Sans SC", fontSize: "3.3rem"});
     };
     const modePinyin = () => {
       setCardContent(deck[currentCardNumber].pinyin);
-      setFont({fontFamily: "sans-serif", fontSize: "2.2rem"});
+      setStyle({fontFamily: "sans-serif", fontSize: "2.2rem"});
     };
     const modeEnglish = () => {
       setCardContent(deck[0].english);
-      setFont({fontFamily: "Ubuntu", fontSize: "2.4rem"});
+      setStyle({fontFamily: "Ubuntu", fontSize: "2.4rem"});
     };
     const cardNext = () => {
     };
     const cardPrevious = () => {
     };
-    return /* @__PURE__ */ import_react10.default.createElement("div", null, /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
+    return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(AppContainer, null, /* @__PURE__ */ import_react12.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react12.default.createElement(ButtonSimplified, {
       onClick: modeSimplified
-    }, "\u6C49\u5B57"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
+    }, "\u6C49\u5B57"), /* @__PURE__ */ import_react12.default.createElement(ButtonPinyin, {
       onClick: modePinyin
-    }, "\u62FC\u97F3"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
+    }, "\u62FC\u97F3"), /* @__PURE__ */ import_react12.default.createElement(ControlPanelButton, {
       english: true,
       onClick: modeEnglish
-    }, "EN")), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, {
-      font
-    }, cardContent), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, {
-      font
-    }, cardContent))))), /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(NavigationPanel, null)));
+    }, "EN"), /* @__PURE__ */ import_react12.default.createElement(ControlPanelButton, {
+      settings: true,
+      onClick: modeEnglish
+    }, /* @__PURE__ */ import_react12.default.createElement(MdSettings, null))), /* @__PURE__ */ import_react12.default.createElement(Flashcard, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Front, {
+      style
+    }, cardContent), /* @__PURE__ */ import_react12.default.createElement(Flashcard_Back, {
+      style
+    }, cardContent))))), /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(NavigationPanel, null, /* @__PURE__ */ import_react12.default.createElement(NavigationButton, null, "\u4E0A"), /* @__PURE__ */ import_react12.default.createElement(Spacer, null), /* @__PURE__ */ import_react12.default.createElement(NavigationButton, null, "\u4E0B"))));
   };
 
   // src/config/routes.tsx
@@ -33953,11 +34107,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   ];
 
   // src/components/route.tsx
-  var import_react11 = __toModule(require_react());
+  var import_react13 = __toModule(require_react());
   var Route2 = (route) => {
-    return /* @__PURE__ */ import_react11.default.createElement(Route, {
+    return /* @__PURE__ */ import_react13.default.createElement(Route, {
       path: route.path,
-      render: (props) => /* @__PURE__ */ import_react11.default.createElement(route.component, {
+      render: (props) => /* @__PURE__ */ import_react13.default.createElement(route.component, {
         ...props,
         routes: route.routes
       })
@@ -33971,9 +34125,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }
 `;
   var App = () => {
-    return /* @__PURE__ */ import_react12.default.createElement(import_react12.Suspense, {
-      fallback: /* @__PURE__ */ import_react12.default.createElement("div", null, "Loading")
-    }, /* @__PURE__ */ import_react12.default.createElement(GlobalStyle2, null), /* @__PURE__ */ import_react12.default.createElement(Switch, null, ROUTES.map((route, i3) => /* @__PURE__ */ import_react12.default.createElement(Route2, {
+    return /* @__PURE__ */ import_react14.default.createElement(import_react14.Suspense, {
+      fallback: /* @__PURE__ */ import_react14.default.createElement("div", null, "Loading")
+    }, /* @__PURE__ */ import_react14.default.createElement(GlobalStyle2, null), /* @__PURE__ */ import_react14.default.createElement(Switch, null, ROUTES.map((route, i3) => /* @__PURE__ */ import_react14.default.createElement(Route2, {
       key: i3,
       ...route
     }))));
@@ -33981,7 +34135,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var app_default = App;
 
   // src/index.tsx
-  import_react_dom.default.render(/* @__PURE__ */ import_react13.default.createElement(ChakraProvider, {
+  import_react_dom.default.render(/* @__PURE__ */ import_react15.default.createElement(ChakraProvider, {
     theme: theme2
-  }, /* @__PURE__ */ import_react13.default.createElement(HashRouter, null, /* @__PURE__ */ import_react13.default.createElement(app_default, null))), document.getElementById("root"));
+  }, /* @__PURE__ */ import_react15.default.createElement(HashRouter, null, /* @__PURE__ */ import_react15.default.createElement(app_default, null))), document.getElementById("root"));
 })();

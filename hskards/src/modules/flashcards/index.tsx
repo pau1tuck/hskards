@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import {
-    Wrapper,
+    Container,
     AppContainer,
     ControlPanel,
     ControlPanelButton,
+    ButtonSimplified,
+    ButtonPinyin,
     Flashcard,
     Flashcard_Inner,
     Flashcard_Front,
     Flashcard_Back,
     NavigationPanel,
+    NavigationButton,
+    Spacer,
 } from "./styles";
+import { MdSettings } from "react-icons/md";
 import { data } from "./dummy-data";
 
 export const Flashcards: React.FC = () => {
@@ -39,22 +44,22 @@ export const FlashcardApp = ({ deck }: any) => {
     const [cardContent, setCardContent] = useState(
         deck[currentCardNumber].simplified
     );
-    const [font, setFont] = useState({
+    const [style, setStyle] = useState({
         fontFamily: "Noto Sans SC",
         fontSize: "3.3rem",
     });
 
     const modeSimplified = () => {
         setCardContent(deck[currentCardNumber].simplified);
-        setFont({ fontFamily: "Noto Sans SC", fontSize: "3.3rem" });
+        setStyle({ fontFamily: "Noto Sans SC", fontSize: "3.3rem" });
     };
     const modePinyin = () => {
         setCardContent(deck[currentCardNumber].pinyin);
-        setFont({ fontFamily: "sans-serif", fontSize: "2.2rem" });
+        setStyle({ fontFamily: "sans-serif", fontSize: "2.2rem" });
     };
     const modeEnglish = () => {
         setCardContent(deck[0].english);
-        setFont({ fontFamily: "Ubuntu", fontSize: "2.4rem" });
+        setStyle({ fontFamily: "Ubuntu", fontSize: "2.4rem" });
     };
 
     const cardNext = () => {};
@@ -62,34 +67,39 @@ export const FlashcardApp = ({ deck }: any) => {
 
     return (
         <div>
-            <Wrapper>
+            <Container>
                 <AppContainer>
                     <ControlPanel>
-                        <ControlPanelButton onClick={modeSimplified}>
+                        <ButtonSimplified onClick={modeSimplified}>
                             汉字
-                        </ControlPanelButton>
-                        <ControlPanelButton onClick={modePinyin}>
-                            拼音
-                        </ControlPanelButton>
+                        </ButtonSimplified>
+                        <ButtonPinyin onClick={modePinyin}>拼音</ButtonPinyin>
                         <ControlPanelButton english onClick={modeEnglish}>
                             EN
+                        </ControlPanelButton>
+                        <ControlPanelButton settings onClick={modeEnglish}>
+                            <MdSettings></MdSettings>
                         </ControlPanelButton>
                     </ControlPanel>
                     <Flashcard>
                         <Flashcard_Inner>
-                            <Flashcard_Front font={font}>
+                            <Flashcard_Front style={style}>
                                 {cardContent}
                             </Flashcard_Front>
-                            <Flashcard_Back font={font}>
+                            <Flashcard_Back style={style}>
                                 {cardContent}
                             </Flashcard_Back>
                         </Flashcard_Inner>
                     </Flashcard>
                 </AppContainer>
-            </Wrapper>
-            <Wrapper>
-                <NavigationPanel></NavigationPanel>
-            </Wrapper>
+            </Container>
+            <Container>
+                <NavigationPanel>
+                    <NavigationButton>上</NavigationButton>
+                    <Spacer></Spacer>
+                    <NavigationButton>下</NavigationButton>
+                </NavigationPanel>
+            </Container>
         </div>
     );
 };
