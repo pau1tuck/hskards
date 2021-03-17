@@ -8,6 +8,7 @@ import {
     Flashcard_Inner,
     Flashcard_Front,
     Flashcard_Back,
+    NavigationPanel,
 } from "./styles";
 import { data } from "./dummy-data";
 
@@ -40,17 +41,17 @@ export const FlashcardApp = ({ deck }: any) => {
     );
     const [font, setFont] = useState({
         fontFamily: "Noto Sans SC",
-        fontSize: "3rem",
+        fontSize: "3.3rem",
     });
 
     const modeSimplified = () => {
         setCardContent(deck[currentCardNumber].simplified);
-        setFont({ fontFamily: "Noto Sans SC", fontSize: "3rem" });
+        setFont({ fontFamily: "Noto Sans SC", fontSize: "3.3rem" });
     };
     const modePinyin = () => {
         setCardContent(deck[currentCardNumber].pinyin);
+        setFont({ fontFamily: "sans-serif", fontSize: "2.2rem" });
     };
-
     const modeEnglish = () => {
         setCardContent(deck[0].english);
         setFont({ fontFamily: "Ubuntu", fontSize: "2.4rem" });
@@ -60,30 +61,35 @@ export const FlashcardApp = ({ deck }: any) => {
     const cardPrevious = () => {};
 
     return (
-        <Wrapper>
-            <AppContainer>
-                <ControlPanel>
-                    <ControlPanelButton onClick={modeSimplified}>
-                        汉字
-                    </ControlPanelButton>
-                    <ControlPanelButton onClick={modePinyin}>
-                        拼音
-                    </ControlPanelButton>
-                    <ControlPanelButton english onClick={modeEnglish}>
-                        EN
-                    </ControlPanelButton>
-                </ControlPanel>
-                <Flashcard>
-                    <Flashcard_Inner>
-                        <Flashcard_Front font={font}>
-                            {cardContent}
-                        </Flashcard_Front>
-                        <Flashcard_Back font={font}>
-                            {cardContent}
-                        </Flashcard_Back>
-                    </Flashcard_Inner>
-                </Flashcard>
-            </AppContainer>
-        </Wrapper>
+        <div>
+            <Wrapper>
+                <AppContainer>
+                    <ControlPanel>
+                        <ControlPanelButton onClick={modeSimplified}>
+                            汉字
+                        </ControlPanelButton>
+                        <ControlPanelButton onClick={modePinyin}>
+                            拼音
+                        </ControlPanelButton>
+                        <ControlPanelButton english onClick={modeEnglish}>
+                            EN
+                        </ControlPanelButton>
+                    </ControlPanel>
+                    <Flashcard>
+                        <Flashcard_Inner>
+                            <Flashcard_Front font={font}>
+                                {cardContent}
+                            </Flashcard_Front>
+                            <Flashcard_Back font={font}>
+                                {cardContent}
+                            </Flashcard_Back>
+                        </Flashcard_Inner>
+                    </Flashcard>
+                </AppContainer>
+            </Wrapper>
+            <Wrapper>
+                <NavigationPanel></NavigationPanel>
+            </Wrapper>
+        </div>
     );
 };

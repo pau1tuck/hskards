@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-interface FontProps {
-    readonly font: any;
+interface FlashcardFontProps {
+    readonly font: { fontFamily: string; fontSize: string };
 }
 
 interface ControlPanelButtonProps {
@@ -36,6 +36,7 @@ export const ControlPanel = styled.section`
         height: 260px;
     }
     margin-right: 7px;
+    padding-top: 5px;
 `;
 
 export const ControlPanelButton = styled.div<ControlPanelButtonProps>`
@@ -82,14 +83,15 @@ export const Flashcard_Inner = styled.section`
     }
 `;
 
-export const Flashcard_Front = styled.section<FontProps>`
+export const Flashcard_Front = styled.section<FlashcardFontProps>`
     position: absolute;
     display: flex;
     width: 100%;
     height: 100%;
     padding-bottom: 25px;
-    border-radius: 3px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 10px;
+    // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 0.25rem 1rem 0 rgb(0 0 0 / 16%);
     background-color: #fff;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
@@ -97,9 +99,11 @@ export const Flashcard_Front = styled.section<FontProps>`
     justify-content: center;
     font-family: ${(props) => props.font.fontFamily || "sans-serif"};
     font-size: ${(props) => props.font.fontSize};
+    font-weight: 400;
+    color: #000066;
 `;
 
-export const Flashcard_Back = styled.section<FontProps>`
+export const Flashcard_Back = styled.section<FlashcardFontProps>`
     position: absolute;
     display: flex;
     width: 100%;
@@ -118,4 +122,12 @@ export const Flashcard_Back = styled.section<FontProps>`
     @media (min-width: 600px) {
         font-size: 3rem;
     }
+`;
+
+export const NavigationPanel = styled.section`
+    width: 407px;
+    height: 40px;
+    margin-top: 18px;
+    margin-left: 54px;
+    background-color: lightblue;
 `;

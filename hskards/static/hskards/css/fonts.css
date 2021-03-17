@@ -93,3 +93,15 @@
     font-weight: 400;
     font-style: normal;
 }
+
+@font-face {
+    font-family: "Hanyi Senty Tang";
+    src: url("../fonts/HanyiSentyTang.eot");
+    src: url("../fonts/HanyiSentyTang.eot") format("embedded-opentype"),
+        url("../fonts/HanyiSentyTang.woff") format("woff"),
+        url("../fonts/HanyiSentyTang.woff2") format("woff2"),
+        url("../fonts/HanyiSentyTang.ttf") format("truetype"),
+        url("../fonts/HanyiSentyTang.svg") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}

@@ -33740,6 +33740,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         height: 260px;
     }
     margin-right: 7px;
+    padding-top: 5px;
 `;
   var ControlPanelButton = styled_components_browser_esm_default.div`
     display: flex;
@@ -33788,8 +33789,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     width: 100%;
     height: 100%;
     padding-bottom: 25px;
-    border-radius: 3px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 10px;
+    // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 0.25rem 1rem 0 rgb(0 0 0 / 16%);
     background-color: #fff;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
@@ -33797,6 +33799,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     justify-content: center;
     font-family: ${(props) => props.font.fontFamily || "sans-serif"};
     font-size: ${(props) => props.font.fontSize};
+    font-weight: 400;
+    color: #000066;
 `;
   var Flashcard_Back = styled_components_browser_esm_default.section`
     position: absolute;
@@ -33817,6 +33821,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     @media (min-width: 600px) {
         font-size: 3rem;
     }
+`;
+  var NavigationPanel = styled_components_browser_esm_default.section`
+    width: 407px;
+    height: 40px;
+    margin-top: 18px;
+    margin-left: 54px;
+    background-color: lightblue;
 `;
 
   // src/modules/flashcards/dummy-data.ts
@@ -33900,14 +33911,15 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     const [cardContent, setCardContent] = (0, import_react10.useState)(deck[currentCardNumber].simplified);
     const [font, setFont] = (0, import_react10.useState)({
       fontFamily: "Noto Sans SC",
-      fontSize: "3rem"
+      fontSize: "3.3rem"
     });
     const modeSimplified = () => {
       setCardContent(deck[currentCardNumber].simplified);
-      setFont({fontFamily: "Noto Sans SC", fontSize: "3rem"});
+      setFont({fontFamily: "Noto Sans SC", fontSize: "3.3rem"});
     };
     const modePinyin = () => {
       setCardContent(deck[currentCardNumber].pinyin);
+      setFont({fontFamily: "sans-serif", fontSize: "2.2rem"});
     };
     const modeEnglish = () => {
       setCardContent(deck[0].english);
@@ -33917,7 +33929,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     };
     const cardPrevious = () => {
     };
-    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
+    return /* @__PURE__ */ import_react10.default.createElement("div", null, /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
       onClick: modeSimplified
     }, "\u6C49\u5B57"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
       onClick: modePinyin
@@ -33928,7 +33940,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       font
     }, cardContent), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, {
       font
-    }, cardContent)))));
+    }, cardContent))))), /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(NavigationPanel, null)));
   };
 
   // src/config/routes.tsx
