@@ -33728,7 +33728,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     display: flex;
     width: 100%;
     @media (min-width: 600px) {
-        width: 460px;
+        width: 500px;
     }
     margin: 10px;
     justify-content: center;
@@ -33752,7 +33752,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     align-items: center;
     justify-content: center;
     text-align: center;
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: #0095ff;
     color: #fff;
     font-family: ${(props) => props.english ? "Ubuntu" : "Noto Sans SC"};
@@ -33800,7 +33800,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     font-family: ${(props) => props.font.fontFamily || "sans-serif"};
     font-size: ${(props) => props.font.fontSize};
     font-weight: 400;
-    color: #000066;
+    color: #202020;
 `;
   var Flashcard_Back = styled_components_browser_esm_default.section`
     position: absolute;

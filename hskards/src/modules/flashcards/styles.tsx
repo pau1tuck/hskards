@@ -23,7 +23,7 @@ export const AppContainer = styled.section`
     display: flex;
     width: 100%;
     @media (min-width: 600px) {
-        width: 460px;
+        width: 500px;
     }
     margin: 10px;
     justify-content: center;
@@ -100,7 +100,7 @@ export const Flashcard_Front = styled.section<FlashcardFontProps>`
     font-family: ${(props) => props.font.fontFamily || "sans-serif"};
     font-size: ${(props) => props.font.fontSize};
     font-weight: 400;
-    color: #000066;
+    color: #202020;
 `;
 
 export const Flashcard_Back = styled.section<FlashcardFontProps>`
