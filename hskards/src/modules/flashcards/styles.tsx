@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-interface FontFamilyProps {
-    readonly fontFamily: string;
+interface FontProps {
+    readonly font: any;
 }
 
 interface ControlPanelButtonProps {
@@ -82,7 +82,7 @@ export const Flashcard_Inner = styled.section`
     }
 `;
 
-export const Flashcard_Front = styled.section<FontFamilyProps>`
+export const Flashcard_Front = styled.section<FontProps>`
     position: absolute;
     display: flex;
     width: 100%;
@@ -95,14 +95,11 @@ export const Flashcard_Front = styled.section<FontFamilyProps>`
     backface-visibility: hidden;
     align-items: center;
     justify-content: center;
-    font-family: ${(props) => props.fontFamily || "sans-serif"};
-    font-size: 2rem;
-    @media (min-width: 600px) {
-        font-size: 3rem;
-    }
+    font-family: ${(props) => props.font.fontFamily || "sans-serif"};
+    font-size: ${(props) => props.font.fontSize};
 `;
 
-export const Flashcard_Back = styled.section<FontFamilyProps>`
+export const Flashcard_Back = styled.section<FontProps>`
     position: absolute;
     display: flex;
     width: 100%;
@@ -116,7 +113,7 @@ export const Flashcard_Back = styled.section<FontFamilyProps>`
     transform: rotateX(180deg);
     align-items: center;
     justify-content: center;
-    font-family: ${(props) => props.fontFamily || "sans-serif"};
+    font-family: ${(props) => props.font.fontFamily || "sans-serif"};
     font-size: 2rem;
     @media (min-width: 600px) {
         font-size: 3rem;

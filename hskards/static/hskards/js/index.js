@@ -33795,11 +33795,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     backface-visibility: hidden;
     align-items: center;
     justify-content: center;
-    font-family: ${(props) => props.fontFamily || "sans-serif"};
-    font-size: 2rem;
-    @media (min-width: 600px) {
-        font-size: 3rem;
-    }
+    font-family: ${(props) => props.font.fontFamily || "sans-serif"};
+    font-size: ${(props) => props.font.fontSize};
 `;
   var Flashcard_Back = styled_components_browser_esm_default.section`
     position: absolute;
@@ -33815,7 +33812,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     transform: rotateX(180deg);
     align-items: center;
     justify-content: center;
-    font-family: ${(props) => props.fontFamily || "sans-serif"};
+    font-family: ${(props) => props.font.fontFamily || "sans-serif"};
     font-size: 2rem;
     @media (min-width: 600px) {
         font-size: 3rem;
@@ -33878,34 +33875,59 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 
   // src/modules/flashcards/index.tsx
   var Flashcards = () => {
-    const [mode2, setMode] = (0, import_react10.useState)("simplified");
-    const [card, setcard] = (0, import_react10.useState)([]);
+    let deck = [];
+    let randomOrder = [];
+    const newSequence = (n3) => {
+      while (randomOrder.length < n3) {
+        let rnd = Math.floor(Math.random() * n3);
+        if (randomOrder.indexOf(rnd) === -1)
+          randomOrder.push(rnd);
+      }
+    };
+    const shuffleCards = () => {
+      newSequence(data.length);
+      for (let i3 = 0; i3 < data.length; i3++) {
+        deck.push(data[randomOrder[i3]]);
+      }
+    };
+    shuffleCards();
+    return /* @__PURE__ */ import_react10.default.createElement(FlashcardApp, {
+      deck
+    });
+  };
+  var FlashcardApp = ({deck}) => {
     const [currentCardNumber, setCurrentCardNumber] = (0, import_react10.useState)(0);
-    const [name, setName] = (0, import_react10.useState)("Cat");
-    const [cardContent, setCardContent] = (0, import_react10.useState)(data[currentCardNumber].simplified);
-    let simplified = [];
-    let pinyin = [];
-    let english = [];
-    let vocabulary = [];
-    const [font, setFont] = (0, import_react10.useState)("Noto Sans SC");
+    const [cardContent, setCardContent] = (0, import_react10.useState)(deck[currentCardNumber].simplified);
+    const [font, setFont] = (0, import_react10.useState)({
+      fontFamily: "Noto Sans SC",
+      fontSize: "3rem"
+    });
     const modeSimplified = () => {
+      setCardContent(deck[currentCardNumber].simplified);
+      setFont({fontFamily: "Noto Sans SC", fontSize: "3rem"});
     };
     const modePinyin = () => {
+      setCardContent(deck[currentCardNumber].pinyin);
     };
     const modeEnglish = () => {
-      setCardContent(data[currentCardNumber].english);
+      setCardContent(deck[0].english);
+      setFont({fontFamily: "Ubuntu", fontSize: "2.4rem"});
     };
     const cardNext = () => {
     };
     const cardPrevious = () => {
     };
-    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, null, "\u6C49\u5B57"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, null, "\u62FC\u97F3"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
+    return /* @__PURE__ */ import_react10.default.createElement(Wrapper, null, /* @__PURE__ */ import_react10.default.createElement(AppContainer, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
+      onClick: modeSimplified
+    }, "\u6C49\u5B57"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
+      onClick: modePinyin
+    }, "\u62FC\u97F3"), /* @__PURE__ */ import_react10.default.createElement(ControlPanelButton, {
       english: true,
       onClick: modeEnglish
     }, "EN")), /* @__PURE__ */ import_react10.default.createElement(Flashcard, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react10.default.createElement(Flashcard_Front, {
-      fontFamily: font
+      font
     }, cardContent), /* @__PURE__ */ import_react10.default.createElement(Flashcard_Back, {
-      fontFamily: font
+      font
     }, cardContent)))));
   };
 
