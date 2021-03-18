@@ -33761,7 +33761,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     font-size: ${(props) => props.settings ? "1.6rem" : "1rem"};
     cursor: pointer;
     &:hover {
-        background-color: ${(props) => props.settings ? "#253f3f" : "#007fd9"};
+        background-color: ${(props) => props.settings ? "#274242" : "#007fd9"};
     }
 `;
   var ButtonSimplified = styled_components_browser_esm_default.div`
@@ -33782,7 +33782,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     font-size: 1rem;
     cursor: pointer;
     &:hover {
-        background-color: #007fd9;
+        background-color: #004675;
     }
 `;
   var ButtonPinyin = styled_components_browser_esm_default.div`
@@ -33803,7 +33803,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     font-size: 1rem;
     cursor: pointer;
     &:hover {
-        background-color: #007fd9;
+        background-color: #007c7c;
     }
 `;
   var Flashcard = styled_components_browser_esm_default.section`
@@ -33832,6 +33832,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     display: flex;
     width: 100%;
     height: 100%;
+    padding-top: ${(props) => props.style.paddingTop || "0"};
     padding-bottom: 20px;
     border-radius: 10px;
     // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -33892,6 +33893,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }
 `;
   var Spacer = styled_components_browser_esm_default.div`
+    flex-grow: 1;
+`;
+  var FlashcardText = styled_components_browser_esm_default.p`
     flex-grow: 1;
 `;
 
@@ -34061,20 +34065,33 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     const [currentCardNumber, setCurrentCardNumber] = (0, import_react12.useState)(0);
     const [cardContent, setCardContent] = (0, import_react12.useState)(deck[currentCardNumber].simplified);
     const [style, setStyle] = (0, import_react12.useState)({
+      paddingTop: "10px",
       fontFamily: "Noto Sans SC",
       fontSize: "3.3rem"
     });
     const modeSimplified = () => {
       setCardContent(deck[currentCardNumber].simplified);
-      setStyle({fontFamily: "Noto Sans SC", fontSize: "3.3rem"});
+      setStyle({
+        paddingTop: "10px",
+        fontFamily: "Noto Sans SC",
+        fontSize: "3.3rem"
+      });
     };
     const modePinyin = () => {
       setCardContent(deck[currentCardNumber].pinyin);
-      setStyle({fontFamily: "sans-serif", fontSize: "2.2rem"});
+      setStyle({
+        paddingTop: "20px",
+        fontFamily: "sans-serif",
+        fontSize: "2.2rem"
+      });
     };
     const modeEnglish = () => {
       setCardContent(deck[0].english);
-      setStyle({fontFamily: "Ubuntu", fontSize: "2.4rem"});
+      setStyle({
+        paddingTop: "15px",
+        fontFamily: "Ubuntu",
+        fontSize: "2.4rem"
+      });
     };
     const cardNext = () => {
     };
@@ -34088,8 +34105,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       english: true,
       onClick: modeEnglish
     }, "EN"), /* @__PURE__ */ import_react12.default.createElement(ControlPanelButton, {
-      settings: true,
-      onClick: modeEnglish
+      settings: true
     }, /* @__PURE__ */ import_react12.default.createElement(MdSettings, null))), /* @__PURE__ */ import_react12.default.createElement(Flashcard, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Front, {
       style
     }, cardContent), /* @__PURE__ */ import_react12.default.createElement(Flashcard_Back, {

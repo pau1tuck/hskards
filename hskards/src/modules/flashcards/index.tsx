@@ -45,21 +45,34 @@ export const FlashcardApp = ({ deck }: any) => {
         deck[currentCardNumber].simplified
     );
     const [style, setStyle] = useState({
+        paddingTop: "10px",
         fontFamily: "Noto Sans SC",
         fontSize: "3.3rem",
     });
 
     const modeSimplified = () => {
         setCardContent(deck[currentCardNumber].simplified);
-        setStyle({ fontFamily: "Noto Sans SC", fontSize: "3.3rem" });
+        setStyle({
+            paddingTop: "10px",
+            fontFamily: "Noto Sans SC",
+            fontSize: "3.3rem",
+        });
     };
     const modePinyin = () => {
         setCardContent(deck[currentCardNumber].pinyin);
-        setStyle({ fontFamily: "sans-serif", fontSize: "2.2rem" });
+        setStyle({
+            paddingTop: "20px",
+            fontFamily: "sans-serif",
+            fontSize: "2.2rem",
+        });
     };
     const modeEnglish = () => {
         setCardContent(deck[0].english);
-        setStyle({ fontFamily: "Ubuntu", fontSize: "2.4rem" });
+        setStyle({
+            paddingTop: "15px",
+            fontFamily: "Ubuntu",
+            fontSize: "2.4rem",
+        });
     };
 
     const cardNext = () => {};
@@ -77,7 +90,7 @@ export const FlashcardApp = ({ deck }: any) => {
                         <ControlPanelButton english onClick={modeEnglish}>
                             EN
                         </ControlPanelButton>
-                        <ControlPanelButton settings onClick={modeEnglish}>
+                        <ControlPanelButton settings>
                             <MdSettings></MdSettings>
                         </ControlPanelButton>
                     </ControlPanel>

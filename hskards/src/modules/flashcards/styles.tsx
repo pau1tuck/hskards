@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 interface FlashcardFontProps {
-    readonly style: { fontFamily: string; fontSize: string };
+    readonly style: {
+        paddingTop?: string;
+        fontFamily: string;
+        fontSize: string;
+    };
 }
 
 interface ControlPanelButtonProps {
@@ -60,7 +64,7 @@ export const ControlPanelButton = styled.div<ControlPanelButtonProps>`
     cursor: pointer;
     &:hover {
         background-color: ${(props) =>
-            props.settings ? "#253f3f" : "#007fd9"};
+            props.settings ? "#274242" : "#007fd9"};
     }
 `;
 
@@ -82,7 +86,7 @@ export const ButtonSimplified = styled.div<ControlPanelButtonProps>`
     font-size: 1rem;
     cursor: pointer;
     &:hover {
-        background-color: #007fd9;
+        background-color: #004675;
     }
 `;
 
@@ -104,7 +108,7 @@ export const ButtonPinyin = styled.div<ControlPanelButtonProps>`
     font-size: 1rem;
     cursor: pointer;
     &:hover {
-        background-color: #007fd9;
+        background-color: #007c7c;
     }
 `;
 
@@ -136,6 +140,7 @@ export const Flashcard_Front = styled.section<FlashcardFontProps>`
     display: flex;
     width: 100%;
     height: 100%;
+    padding-top: ${(props) => props.style.paddingTop || "0"};
     padding-bottom: 20px;
     border-radius: 10px;
     // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -200,5 +205,9 @@ export const NavigationButton = styled.div`
 `;
 
 export const Spacer = styled.div`
+    flex-grow: 1;
+`;
+
+export const FlashcardText = styled.p`
     flex-grow: 1;
 `;
