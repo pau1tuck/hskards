@@ -67,7 +67,7 @@ export const FlashcardApp = ({ deck }: any) => {
         });
     };
     const modeEnglish = () => {
-        setCardContent(deck[0].english);
+        setCardContent(deck[currentCardNumber].english);
         setStyle({
             paddingTop: "15px",
             fontFamily: "Ubuntu",
@@ -75,8 +75,17 @@ export const FlashcardApp = ({ deck }: any) => {
         });
     };
 
-    const cardNext = () => {};
-    const cardPrevious = () => {};
+    const cardNext = () => {
+        setCurrentCardNumber(currentCardNumber + 1);
+    };
+
+    const cardPrevious = () => {
+        setCurrentCardNumber(currentCardNumber - 1);
+    };
+
+    useEffect(() => {
+        modeSimplified();
+    }, [currentCardNumber]);
 
     return (
         <div>
@@ -108,9 +117,11 @@ export const FlashcardApp = ({ deck }: any) => {
             </Container>
             <Container>
                 <NavigationPanel>
-                    <NavigationButton>上</NavigationButton>
+                    <NavigationButton onClick={cardPrevious}>
+                        上
+                    </NavigationButton>
                     <Spacer></Spacer>
-                    <NavigationButton>下</NavigationButton>
+                    <NavigationButton onClick={cardNext}>下</NavigationButton>
                 </NavigationPanel>
             </Container>
         </div>

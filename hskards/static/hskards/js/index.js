@@ -34086,7 +34086,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       });
     };
     const modeEnglish = () => {
-      setCardContent(deck[0].english);
+      setCardContent(deck[currentCardNumber].english);
       setStyle({
         paddingTop: "15px",
         fontFamily: "Ubuntu",
@@ -34094,9 +34094,14 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       });
     };
     const cardNext = () => {
+      setCurrentCardNumber(currentCardNumber + 1);
     };
     const cardPrevious = () => {
+      setCurrentCardNumber(currentCardNumber - 1);
     };
+    (0, import_react12.useEffect)(() => {
+      modeSimplified();
+    }, [currentCardNumber]);
     return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(AppContainer, null, /* @__PURE__ */ import_react12.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react12.default.createElement(ButtonSimplified, {
       onClick: modeSimplified
     }, "\u6C49\u5B57"), /* @__PURE__ */ import_react12.default.createElement(ButtonPinyin, {
@@ -34110,7 +34115,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       style
     }, cardContent), /* @__PURE__ */ import_react12.default.createElement(Flashcard_Back, {
       style
-    }, cardContent))))), /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(NavigationPanel, null, /* @__PURE__ */ import_react12.default.createElement(NavigationButton, null, "\u4E0A"), /* @__PURE__ */ import_react12.default.createElement(Spacer, null), /* @__PURE__ */ import_react12.default.createElement(NavigationButton, null, "\u4E0B"))));
+    }, cardContent))))), /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(NavigationPanel, null, /* @__PURE__ */ import_react12.default.createElement(NavigationButton, {
+      onClick: cardPrevious
+    }, "\u4E0A"), /* @__PURE__ */ import_react12.default.createElement(Spacer, null), /* @__PURE__ */ import_react12.default.createElement(NavigationButton, {
+      onClick: cardNext
+    }, "\u4E0B"))));
   };
 
   // src/config/routes.tsx
