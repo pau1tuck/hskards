@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface FlashcardFontProps {
+interface FlashcardProps {
     readonly style: {
         paddingTop?: string;
         fontFamily: string;
@@ -66,49 +66,40 @@ export const ControlPanelButton = styled.div<ControlPanelButtonProps>`
         background-color: ${(props) =>
             props.settings ? "#274242" : "#007fd9"};
     }
-`;
-
-export const ButtonSimplified = styled.div<ControlPanelButtonProps>`
-    display: flex;
-    width: 100%;
-    height: 50px;
-    margin-top: 3px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 3px;
-    background-color: #005089;
-    color: #fff;
-    font-family: "Noto Sans SC";
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    &:hover {
-        background-color: #004675;
+    &.disabled {
+        opacity: 0.3;
+        cursor: default;
+        &:hover {
+            background-color: #0095ff;
+        }
     }
 `;
 
-export const ButtonPinyin = styled.div<ControlPanelButtonProps>`
-    display: flex;
-    width: 100%;
-    height: 50px;
-    margin-top: 3px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 3px;
-    background-color: #008b8b;
-    color: #fff;
+export const ButtonSimplified = styled(ControlPanelButton)`
+    background-color: #005089;
     font-family: "Noto Sans SC";
-    font-weight: 700;
     font-size: 1rem;
-    cursor: pointer;
+    &:hover {
+        background-color: #004675;
+    }
+    &.disabled {
+        &:hover {
+            background-color: #004675;
+        }
+    }
+`;
+
+export const ButtonPinyin = styled(ControlPanelButton)`
+    background-color: #008b8b;
+    font-family: "Noto Sans SC";
+    font-size: 1rem;
     &:hover {
         background-color: #007c7c;
+    }
+    &.disabled {
+        &:hover {
+            background-color: #007c7c;
+        }
     }
 `;
 
@@ -135,46 +126,43 @@ export const Flashcard_Inner = styled.section`
     }
 `;
 
-export const Flashcard_Front = styled.section<FlashcardFontProps>`
+const Flashcard_Content = styled.section`
     position: absolute;
     display: flex;
     width: 100%;
     height: 100%;
-    padding-top: ${(props) => props.style.paddingTop || "0"};
     padding-bottom: 20px;
     border-radius: 10px;
-    // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     box-shadow: 0 0.25rem 1rem 0 rgb(0 0 0 / 16%);
     background-color: #fff;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
     align-items: center;
     justify-content: center;
-    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
-    font-size: ${(props) => props.style.fontSize};
     font-weight: 400;
     color: #202020;
+    .simplified & {
+        @media (min-width: 600px) {
+            padding-top: "10px";
+            font-family: "Noto Sans SC";
+            font-size: "3.3rem";
+        }
+    }
+    .pinyin & {
+    }
 `;
 
-export const Flashcard_Back = styled.section<FlashcardFontProps>`
-    position: absolute;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 25px;
-    border-radius: 3px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    background-color: #fff;
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-    transform: rotateX(180deg);
-    align-items: center;
-    justify-content: center;
+export const Flashcard_Front = styled(Flashcard_Content)<FlashcardProps>`
+    padding-top: ${(props) => props.style.paddingTop || "0"};
     font-family: ${(props) => props.style.fontFamily || "sans-serif"};
-    font-size: 2rem;
-    @media (min-width: 600px) {
-        font-size: 3rem;
-    }
+    font-size: ${(props) => props.style.fontSize};
+`;
+
+export const Flashcard_Back = styled(Flashcard_Content)<FlashcardProps>`
+    padding-top: ${(props) => props.style.paddingTop || "0"};
+    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
+    font-size: ${(props) => props.style.fontSize};
+    transform: rotateX(180deg);
 `;
 
 export const NavigationPanel = styled.section`
@@ -201,6 +189,13 @@ export const NavigationButton = styled.div`
     cursor: pointer;
     &:hover {
         background-color: #007fd9;
+    }
+    &.disabled {
+        opacity: 0.3;
+        cursor: default;
+        &:hover {
+            background-color: #0095ff;
+        }
     }
 `;
 

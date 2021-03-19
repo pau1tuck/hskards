@@ -49,14 +49,24 @@ export const FlashcardApp = ({ deck }: any) => {
         fontFamily: "Noto Sans SC",
         fontSize: "3.3rem",
     });
+    const [disabled, setDisabled] = useState({
+        buttonSimplified: true,
+        buttonPinyin: false,
+        buttonEnglish: false,
+        buttonBack: true,
+        buttonForward: false,
+    });
 
     const modeSimplified = () => {
-        setCardContent(deck[currentCardNumber].simplified);
-        setStyle({
-            paddingTop: "10px",
-            fontFamily: "Noto Sans SC",
-            fontSize: "3.3rem",
-        });
+        if (!disabled.buttonSimplified) {
+            setCardContent(deck[currentCardNumber].simplified);
+            setDisabled((prevState) => {
+                return {
+                    ...prevState,
+                    buttonSimplified: true,
+                };
+            });
+        }
     };
     const modePinyin = () => {
         setCardContent(deck[currentCardNumber].pinyin);
@@ -92,7 +102,12 @@ export const FlashcardApp = ({ deck }: any) => {
             <Container>
                 <AppContainer>
                     <ControlPanel>
-                        <ButtonSimplified onClick={modeSimplified}>
+                        <ButtonSimplified
+                            className={
+                                disabled.buttonSimplified ? "disabled" : ""
+                            }
+                            onClick={modeSimplified}
+                        >
                             汉字
                         </ButtonSimplified>
                         <ButtonPinyin onClick={modePinyin}>拼音</ButtonPinyin>
@@ -117,11 +132,19 @@ export const FlashcardApp = ({ deck }: any) => {
             </Container>
             <Container>
                 <NavigationPanel>
-                    <NavigationButton onClick={cardPrevious}>
+                    <NavigationButton
+                        className={disabled.buttonBack ? "disabled" : ""}
+                        onClick={cardPrevious}
+                    >
                         上
                     </NavigationButton>
                     <Spacer></Spacer>
-                    <NavigationButton onClick={cardNext}>下</NavigationButton>
+                    <NavigationButton
+                        className={disabled.buttonForward ? "disabled" : ""}
+                        onClick={cardNext}
+                    >
+                        下
+                    </NavigationButton>
                 </NavigationPanel>
             </Container>
         </div>

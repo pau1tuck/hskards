@@ -33763,47 +33763,38 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     &:hover {
         background-color: ${(props) => props.settings ? "#274242" : "#007fd9"};
     }
+    &.disabled {
+        opacity: 0.3;
+        cursor: default;
+        &:hover {
+            background-color: #0095ff;
+        }
+    }
 `;
-  var ButtonSimplified = styled_components_browser_esm_default.div`
-    display: flex;
-    width: 100%;
-    height: 50px;
-    margin-top: 3px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 3px;
+  var ButtonSimplified = styled_components_browser_esm_default(ControlPanelButton)`
     background-color: #005089;
-    color: #fff;
     font-family: "Noto Sans SC";
-    font-weight: 700;
     font-size: 1rem;
-    cursor: pointer;
     &:hover {
         background-color: #004675;
     }
+    &.disabled {
+        &:hover {
+            background-color: #004675;
+        }
+    }
 `;
-  var ButtonPinyin = styled_components_browser_esm_default.div`
-    display: flex;
-    width: 100%;
-    height: 50px;
-    margin-top: 3px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 3px;
+  var ButtonPinyin = styled_components_browser_esm_default(ControlPanelButton)`
     background-color: #008b8b;
-    color: #fff;
     font-family: "Noto Sans SC";
-    font-weight: 700;
     font-size: 1rem;
-    cursor: pointer;
     &:hover {
         background-color: #007c7c;
+    }
+    &.disabled {
+        &:hover {
+            background-color: #007c7c;
+        }
     }
 `;
   var Flashcard = styled_components_browser_esm_default.section`
@@ -33827,45 +33818,41 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         transform: rotateX(180deg);
     }
 `;
-  var Flashcard_Front = styled_components_browser_esm_default.section`
+  var Flashcard_Content = styled_components_browser_esm_default.section`
     position: absolute;
     display: flex;
     width: 100%;
     height: 100%;
-    padding-top: ${(props) => props.style.paddingTop || "0"};
     padding-bottom: 20px;
     border-radius: 10px;
-    // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     box-shadow: 0 0.25rem 1rem 0 rgb(0 0 0 / 16%);
     background-color: #fff;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
     align-items: center;
     justify-content: center;
-    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
-    font-size: ${(props) => props.style.fontSize};
     font-weight: 400;
     color: #202020;
-`;
-  var Flashcard_Back = styled_components_browser_esm_default.section`
-    position: absolute;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 25px;
-    border-radius: 3px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    background-color: #fff;
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-    transform: rotateX(180deg);
-    align-items: center;
-    justify-content: center;
-    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
-    font-size: 2rem;
-    @media (min-width: 600px) {
-        font-size: 3rem;
+    .simplified & {
+        @media (min-width: 600px) {
+            padding-top: "10px";
+            font-family: "Noto Sans SC";
+            font-size: "3.3rem";
+        }
     }
+    .pinyin & {
+    }
+`;
+  var Flashcard_Front = styled_components_browser_esm_default(Flashcard_Content)`
+    padding-top: ${(props) => props.style.paddingTop || "0"};
+    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
+    font-size: ${(props) => props.style.fontSize};
+`;
+  var Flashcard_Back = styled_components_browser_esm_default(Flashcard_Content)`
+    padding-top: ${(props) => props.style.paddingTop || "0"};
+    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
+    font-size: ${(props) => props.style.fontSize};
+    transform: rotateX(180deg);
 `;
   var NavigationPanel = styled_components_browser_esm_default.section`
     display: flex;
@@ -33890,6 +33877,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     cursor: pointer;
     &:hover {
         background-color: #007fd9;
+    }
+    &.disabled {
+        opacity: 0.3;
+        cursor: default;
+        &:hover {
+            background-color: #0095ff;
+        }
     }
 `;
   var Spacer = styled_components_browser_esm_default.div`
@@ -34069,12 +34063,20 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       fontFamily: "Noto Sans SC",
       fontSize: "3.3rem"
     });
+    const [disabled, setDisabled] = (0, import_react12.useState)({
+      buttonSimplified: true,
+      buttonPinyin: false,
+      buttonEnglish: false,
+      buttonBack: true,
+      buttonForward: false
+    });
     const modeSimplified = () => {
-      setCardContent(deck[currentCardNumber].simplified);
-      setStyle({
-        paddingTop: "10px",
-        fontFamily: "Noto Sans SC",
-        fontSize: "3.3rem"
+      !disabled.buttonSimplified && setCardContent(deck[currentCardNumber].simplified);
+      setDisabled((prevState) => {
+        return {
+          ...prevState,
+          buttonSimplified: true
+        };
       });
     };
     const modePinyin = () => {
@@ -34103,6 +34105,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       modeSimplified();
     }, [currentCardNumber]);
     return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(AppContainer, null, /* @__PURE__ */ import_react12.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react12.default.createElement(ButtonSimplified, {
+      className: disabled.buttonSimplified ? "disabled" : "",
       onClick: modeSimplified
     }, "\u6C49\u5B57"), /* @__PURE__ */ import_react12.default.createElement(ButtonPinyin, {
       onClick: modePinyin
@@ -34116,8 +34119,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }, cardContent), /* @__PURE__ */ import_react12.default.createElement(Flashcard_Back, {
       style
     }, cardContent))))), /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(NavigationPanel, null, /* @__PURE__ */ import_react12.default.createElement(NavigationButton, {
+      className: disabled.buttonBack ? "disabled" : "",
       onClick: cardPrevious
     }, "\u4E0A"), /* @__PURE__ */ import_react12.default.createElement(Spacer, null), /* @__PURE__ */ import_react12.default.createElement(NavigationButton, {
+      className: disabled.buttonForward ? "disabled" : "",
       onClick: cardNext
     }, "\u4E0B"))));
   };
