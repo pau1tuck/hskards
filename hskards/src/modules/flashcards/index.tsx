@@ -6,6 +6,8 @@ import {
     ControlPanelButton,
     ButtonSimplified,
     ButtonPinyin,
+    ButtonEnglish,
+    ButtonSettings,
     Flashcard,
     Flashcard_Inner,
     Flashcard_Front,
@@ -40,6 +42,7 @@ export const Flashcards: React.FC = () => {
 };
 
 export const FlashcardApp = ({ deck }: any) => {
+    const [currentMode, setCurrentMode] = useState("simplified");
     const [currentCardNumber, setCurrentCardNumber] = useState(0);
     const [cardContent, setCardContent] = useState(
         deck[currentCardNumber].simplified
@@ -49,32 +52,45 @@ export const FlashcardApp = ({ deck }: any) => {
         fontFamily: "Noto Sans SC",
         fontSize: "3.3rem",
     });
-    const [disabled, setDisabled] = useState({
-        buttonSimplified: true,
-        buttonPinyin: false,
-        buttonEnglish: false,
+
+    // Get settings
+
+    // Settings
+    const [startMode, setStartMode] = useState("simplified");
+
+    const [flashcardStyle, setFlashcardStyle] = useState(startMode);
+
+    // Initialize button enabled/disabled states
+    const [modeDisabled, setModeDisabled] = useState({
+        simplified: true,
+        pinyin: false,
+        english: false,
+    });
+    const [navigationDisabled, setNavigationDisabled] = useState({
         buttonBack: true,
         buttonForward: false,
     });
 
+    // Handle mode buttons
     const modeSimplified = () => {
-        if (!disabled.buttonSimplified) {
+        if (!modeDisabled.simplified) {
             setCardContent(deck[currentCardNumber].simplified);
-            setDisabled((prevState) => {
-                return {
-                    ...prevState,
-                    buttonSimplified: true,
-                };
+            setModeDisabled({
+                simplified: true,
+                pinyin: false,
+                english: false,
             });
         }
     };
     const modePinyin = () => {
-        setCardContent(deck[currentCardNumber].pinyin);
-        setStyle({
-            paddingTop: "20px",
-            fontFamily: "sans-serif",
-            fontSize: "2.2rem",
-        });
+        if (!modeDisabled.pinyin) {
+            setCardContent(deck[currentCardNumber].pinyin);
+            setModeDisabled({
+                simplified: false,
+                pinyin: true,
+                english: false,
+            });
+        }
     };
     const modeEnglish = () => {
         setCardContent(deck[currentCardNumber].english);
@@ -85,16 +101,28 @@ export const FlashcardApp = ({ deck }: any) => {
         });
     };
 
-    const cardNext = () => {
-        setCurrentCardNumber(currentCardNumber + 1);
+    // Handle navigation buttons
+    const cardForward = () => {
+        if (currentCardNumber < deck.length - 1) {
+            setCurrentCardNumber(currentCardNumber + 1);
+        }
+    };
+    const cardBack = () => {
+        currentCardNumber != 0
+            ? setCurrentCardNumber(currentCardNumber - 1)
+            : null;
     };
 
-    const cardPrevious = () => {
-        setCurrentCardNumber(currentCardNumber - 1);
-    };
-
+    // Handle card change (re-render component)
     useEffect(() => {
-        modeSimplified();
+        if (currentCardNumber === 0) {
+            setNavigationDisabled({ buttonBack: true, buttonForward: false });
+        } else if (currentCardNumber === deck.length - 1) {
+            setNavigationDisabled({ buttonBack: false, buttonForward: true });
+        } else {
+            setNavigationDisabled({ buttonBack: false, buttonForward: false });
+        }
+        setCardContent(deck[currentCardNumber].simplified);
     }, [currentCardNumber]);
 
     return (
@@ -104,23 +132,24 @@ export const FlashcardApp = ({ deck }: any) => {
                     <ControlPanel>
                         <ButtonSimplified
                             className={
-                                disabled.buttonSimplified ? "disabled" : ""
+                                modeDisabled.simplified ? "disabled" : ""
                             }
                             onClick={modeSimplified}
                         >
                             汉字
                         </ButtonSimplified>
                         <ButtonPinyin onClick={modePinyin}>拼音</ButtonPinyin>
-                        <ControlPanelButton english onClick={modeEnglish}>
-                            EN
-                        </ControlPanelButton>
-                        <ControlPanelButton settings>
+                        <ButtonEnglish onClick={modeEnglish}>EN</ButtonEnglish>
+                        <ButtonSettings>
                             <MdSettings></MdSettings>
-                        </ControlPanelButton>
+                        </ButtonSettings>
                     </ControlPanel>
                     <Flashcard>
                         <Flashcard_Inner>
-                            <Flashcard_Front style={style}>
+                            <Flashcard_Front
+                                className={flashcardStyle}
+                                style={style}
+                            >
                                 {cardContent}
                             </Flashcard_Front>
                             <Flashcard_Back style={style}>
@@ -133,15 +162,15 @@ export const FlashcardApp = ({ deck }: any) => {
             <Container>
                 <NavigationPanel>
                     <NavigationButton
-                        className={disabled.buttonBack ? "disabled" : ""}
-                        onClick={cardPrevious}
+                        disabled={navigationDisabled.buttonBack}
+                        onClick={cardBack}
                     >
                         上
                     </NavigationButton>
                     <Spacer></Spacer>
                     <NavigationButton
-                        className={disabled.buttonForward ? "disabled" : ""}
-                        onClick={cardNext}
+                        disabled={navigationDisabled.buttonForward}
+                        onClick={cardForward}
                     >
                         下
                     </NavigationButton>

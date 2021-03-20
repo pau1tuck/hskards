@@ -33727,20 +33727,20 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var AppContainer = styled_components_browser_esm_default.section`
     display: flex;
     width: 100%;
+    margin: 10px;
+    justify-content: center;
     @media (min-width: 600px) {
         width: 500px;
     }
-    margin: 10px;
-    justify-content: center;
 `;
   var ControlPanel = styled_components_browser_esm_default.section`
     width: 55px;
     height: 200px;
+    margin-right: 7px;
+    padding-top: 5px;
     @media (min-width: 600px) {
         height: 260px;
     }
-    margin-right: 7px;
-    padding-top: 5px;
 `;
   var ControlPanelButton = styled_components_browser_esm_default.div`
     display: flex;
@@ -33749,52 +33749,51 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     margin-top: 3px;
     padding-right: 1px;
     padding-bottom: 1px;
-    padding-left: ${(props) => props.english || props.settings ? "1px" : "0"};
     align-items: center;
     justify-content: center;
     text-align: center;
     border-radius: 3px;
-    background-color: ${(props) => props.settings ? "#2F4F4F" : "#0095ff"};
     color: #fff;
-    font-family: ${(props) => props.english ? "Ubuntu" : "Noto Sans SC"};
+    font-family: "Noto Sans SC";
     font-weight: 700;
-    font-size: ${(props) => props.settings ? "1.6rem" : "1rem"};
     cursor: pointer;
-    &:hover {
-        background-color: ${(props) => props.settings ? "#274242" : "#007fd9"};
-    }
     &.disabled {
         opacity: 0.3;
         cursor: default;
         &:hover {
-            background-color: #0095ff;
+            background-color: none;
         }
     }
 `;
   var ButtonSimplified = styled_components_browser_esm_default(ControlPanelButton)`
     background-color: #005089;
-    font-family: "Noto Sans SC";
     font-size: 1rem;
     &:hover {
         background-color: #004675;
     }
-    &.disabled {
-        &:hover {
-            background-color: #004675;
-        }
-    }
 `;
   var ButtonPinyin = styled_components_browser_esm_default(ControlPanelButton)`
     background-color: #008b8b;
-    font-family: "Noto Sans SC";
     font-size: 1rem;
     &:hover {
         background-color: #007c7c;
     }
-    &.disabled {
-        &:hover {
-            background-color: #007c7c;
-        }
+`;
+  var ButtonEnglish = styled_components_browser_esm_default(ControlPanelButton)`
+    padding-left: 1px;
+    background-color: #0095ff;
+    font-family: "Ubuntu";
+    font-size: 1rem;
+    &:hover {
+        background-color: #007fd9;
+    }
+`;
+  var ButtonSettings = styled_components_browser_esm_default(ControlPanelButton)`
+    padding-left: 1px;
+    background-color: #2f4f4f;
+    font-size: 1.5rem;
+    &:hover {
+        background-color: #284444;
     }
 `;
   var Flashcard = styled_components_browser_esm_default.section`
@@ -33833,14 +33832,19 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     justify-content: center;
     font-weight: 400;
     color: #202020;
-    .simplified & {
+    &.simplified {
         @media (min-width: 600px) {
             padding-top: "10px";
             font-family: "Noto Sans SC";
             font-size: "3.3rem";
         }
     }
-    .pinyin & {
+    &.pinyin {
+        @media (min-width: 600px) {
+            padding-top: "10px";
+            font-family: "sans-serif";
+            font-size: "2.4rem";
+        }
     }
 `;
   var Flashcard_Front = styled_components_browser_esm_default(Flashcard_Content)`
@@ -33878,13 +33882,17 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     &:hover {
         background-color: #007fd9;
     }
-    &.disabled {
-        opacity: 0.3;
-        cursor: default;
-        &:hover {
-            background-color: #0095ff;
-        }
+    ${(props) => {
+    if (props.disabled) {
+      return `
+                opacity: 0.3;
+                cursor: default;
+                &:hover {
+                    background-color: none;
+                }
+            `;
     }
+  }};
 `;
   var Spacer = styled_components_browser_esm_default.div`
     flex-grow: 1;
@@ -34056,6 +34064,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     });
   };
   var FlashcardApp = ({deck}) => {
+    const [currentMode, setCurrentMode] = (0, import_react12.useState)("simplified");
     const [currentCardNumber, setCurrentCardNumber] = (0, import_react12.useState)(0);
     const [cardContent, setCardContent] = (0, import_react12.useState)(deck[currentCardNumber].simplified);
     const [style, setStyle] = (0, import_react12.useState)({
@@ -34063,29 +34072,30 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       fontFamily: "Noto Sans SC",
       fontSize: "3.3rem"
     });
-    const [disabled, setDisabled] = (0, import_react12.useState)({
-      buttonSimplified: true,
-      buttonPinyin: false,
-      buttonEnglish: false,
+    const [modeDisabled, setModeDisabled] = (0, import_react12.useState)({
+      simplified: true,
+      pinyin: false,
+      english: false
+    });
+    const [navigationDisabled, setNavigationDisabled] = (0, import_react12.useState)({
       buttonBack: true,
       buttonForward: false
     });
+    const [startMode, setStartMode] = (0, import_react12.useState)("simplified");
+    const [flashcardStyle, setFlashcardStyle] = (0, import_react12.useState)(startMode);
     const modeSimplified = () => {
-      !disabled.buttonSimplified && setCardContent(deck[currentCardNumber].simplified);
-      setDisabled((prevState) => {
-        return {
-          ...prevState,
-          buttonSimplified: true
-        };
-      });
+      if (!modeDisabled.simplified) {
+        setCardContent(deck[currentCardNumber].simplified);
+        setModeDisabled((prevState) => {
+          return {
+            ...prevState,
+            simplified: true
+          };
+        });
+      }
     };
     const modePinyin = () => {
       setCardContent(deck[currentCardNumber].pinyin);
-      setStyle({
-        paddingTop: "20px",
-        fontFamily: "sans-serif",
-        fontSize: "2.2rem"
-      });
     };
     const modeEnglish = () => {
       setCardContent(deck[currentCardNumber].english);
@@ -34095,35 +34105,42 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         fontSize: "2.4rem"
       });
     };
-    const cardNext = () => {
-      setCurrentCardNumber(currentCardNumber + 1);
+    const cardForward = () => {
+      if (currentCardNumber < deck.length - 1) {
+        setCurrentCardNumber(currentCardNumber + 1);
+      }
     };
-    const cardPrevious = () => {
-      setCurrentCardNumber(currentCardNumber - 1);
+    const cardBack = () => {
+      currentCardNumber != 0 ? setCurrentCardNumber(currentCardNumber - 1) : null;
     };
     (0, import_react12.useEffect)(() => {
-      modeSimplified();
+      if (currentCardNumber === 0) {
+        setNavigationDisabled({buttonBack: true, buttonForward: false});
+      } else if (currentCardNumber === deck.length - 1) {
+        setNavigationDisabled({buttonBack: false, buttonForward: true});
+      } else {
+        setNavigationDisabled({buttonBack: false, buttonForward: false});
+      }
+      setCardContent(deck[currentCardNumber].simplified);
     }, [currentCardNumber]);
     return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(AppContainer, null, /* @__PURE__ */ import_react12.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react12.default.createElement(ButtonSimplified, {
-      className: disabled.buttonSimplified ? "disabled" : "",
+      className: modeDisabled.simplified ? "disabled" : "",
       onClick: modeSimplified
     }, "\u6C49\u5B57"), /* @__PURE__ */ import_react12.default.createElement(ButtonPinyin, {
       onClick: modePinyin
-    }, "\u62FC\u97F3"), /* @__PURE__ */ import_react12.default.createElement(ControlPanelButton, {
-      english: true,
+    }, "\u62FC\u97F3"), /* @__PURE__ */ import_react12.default.createElement(ButtonEnglish, {
       onClick: modeEnglish
-    }, "EN"), /* @__PURE__ */ import_react12.default.createElement(ControlPanelButton, {
-      settings: true
-    }, /* @__PURE__ */ import_react12.default.createElement(MdSettings, null))), /* @__PURE__ */ import_react12.default.createElement(Flashcard, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Front, {
+    }, "EN"), /* @__PURE__ */ import_react12.default.createElement(ButtonSettings, null, /* @__PURE__ */ import_react12.default.createElement(MdSettings, null))), /* @__PURE__ */ import_react12.default.createElement(Flashcard, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Front, {
+      className: flashcardStyle,
       style
     }, cardContent), /* @__PURE__ */ import_react12.default.createElement(Flashcard_Back, {
       style
     }, cardContent))))), /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(NavigationPanel, null, /* @__PURE__ */ import_react12.default.createElement(NavigationButton, {
-      className: disabled.buttonBack ? "disabled" : "",
-      onClick: cardPrevious
+      disabled: navigationDisabled.buttonBack,
+      onClick: cardBack
     }, "\u4E0A"), /* @__PURE__ */ import_react12.default.createElement(Spacer, null), /* @__PURE__ */ import_react12.default.createElement(NavigationButton, {
-      className: disabled.buttonForward ? "disabled" : "",
-      onClick: cardNext
+      disabled: navigationDisabled.buttonForward,
+      onClick: cardForward
     }, "\u4E0B"))));
   };
 
