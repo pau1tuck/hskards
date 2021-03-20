@@ -33737,8 +33737,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     width: 55px;
     height: 200px;
     margin-right: 7px;
-    padding-top: 5px;
     @media (min-width: 600px) {
+        padding-top: 5px;
         height: 260px;
     }
 `;
@@ -33809,7 +33809,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 `;
   var Flashcard = styled_components_browser_esm_default.section`
     width: 100%;
-    height: 225px;
+    height: 215px;
     background-color: transparent;
     perspective: 1000px;
     &.swipe {
@@ -33847,6 +33847,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     font-weight: 400;
     color: #202020;
     &.simplified {
+        padding-top: 14px;
+        font-family: "Noto Sans SC";
+        font-size: 2.6rem;
         @media (min-width: 600px) {
             padding-top: 10px;
             font-family: "Noto Sans SC";
@@ -33854,6 +33857,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
     }
     &.pinyin {
+        padding-top: 15px;
+        font-family: sans-serif;
+        font-size: 1.7rem;
         @media (min-width: 600px) {
             padding-top: 10px;
             font-family: sans-serif;
@@ -33861,6 +33867,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
     }
     &.english {
+        padding-top: 12px;
+        font-family: Ubuntu;
+        font-size: 1.7rem;
         @media (min-width: 600px) {
             padding-top: 15px;
             font-family: Ubuntu;
@@ -33873,26 +33882,32 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     transform: rotateX(180deg);
 `;
   var FlashcardNumber = styled_components_browser_esm_default.section`
-    padding-top: 11px;
+    padding-top: 17px;
     text-align: center;
     font-family: Ubuntu, sans-serif;
     font-size: 1/1rem;
     color: darkgray;
+    @media (min-width: 600px) {
+        padding-top: 11px;
+    }
 `;
   var NavigationPanel = styled_components_browser_esm_default.section`
     display: flex;
-    width: 445px;
+    margin-top: 33px;
+    margin-left: 53px;
     height: 40px;
-    margin-top: 18px;
-    margin-left: 55px;
+    @media (min-width: 600px) {
+        width: 445px;
+        margin-top: 18px;
+        margin-left: 55px;
+    }
 `;
   var NavigationButton = styled_components_browser_esm_default.div`
     display: flex;
-    width: 220px;
+    width: 145px;
     height: 40px;
     align-items: center;
     justify-content: center;
-    text-align: center;
     border-radius: 5px;
     font-family: "Noto Sans SC";
     font-weight: 700;
@@ -33914,9 +33929,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             `;
     }
   }};
+    @media (min-width: 600px) {
+        width: 220px;
+    }
 `;
   var Spacer = styled_components_browser_esm_default.div`
     flex-grow: 1;
+    min-width: 5px;
 `;
   var FlashcardText = styled_components_browser_esm_default.p`
     flex-grow: 1;
@@ -34174,6 +34193,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       disabled: modeDisabled.pinyin,
       onClick: modePinyin
     }, "\u62FC\u97F3"), /* @__PURE__ */ import_react12.default.createElement(ButtonEnglish, {
+      disabled: modeDisabled.english,
       onClick: modeEnglish
     }, "EN"), /* @__PURE__ */ import_react12.default.createElement(ButtonSettings, null, /* @__PURE__ */ import_react12.default.createElement(MdSettings, null)), /* @__PURE__ */ import_react12.default.createElement(FlashcardNumber, null, currentCardNumber + 1, "/", data.length)), /* @__PURE__ */ import_react12.default.createElement(Flashcard, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Inner, {
       className: flipCard ? "flip" : ""

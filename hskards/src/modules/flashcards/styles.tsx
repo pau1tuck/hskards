@@ -41,8 +41,8 @@ export const ControlPanel = styled.section`
     width: 55px;
     height: 200px;
     margin-right: 7px;
-    padding-top: 5px;
     @media (min-width: 600px) {
+        padding-top: 5px;
         height: 260px;
     }
 `;
@@ -119,7 +119,7 @@ export const ButtonSettings = styled(ControlPanelButton)`
 
 export const Flashcard = styled.section`
     width: 100%;
-    height: 225px;
+    height: 215px;
     background-color: transparent;
     perspective: 1000px;
     &.swipe {
@@ -159,6 +159,9 @@ const Flashcard_Content = styled.section`
     font-weight: 400;
     color: #202020;
     &.simplified {
+        padding-top: 14px;
+        font-family: "Noto Sans SC";
+        font-size: 2.6rem;
         @media (min-width: 600px) {
             padding-top: 10px;
             font-family: "Noto Sans SC";
@@ -166,6 +169,9 @@ const Flashcard_Content = styled.section`
         }
     }
     &.pinyin {
+        padding-top: 15px;
+        font-family: sans-serif;
+        font-size: 1.7rem;
         @media (min-width: 600px) {
             padding-top: 10px;
             font-family: sans-serif;
@@ -173,6 +179,9 @@ const Flashcard_Content = styled.section`
         }
     }
     &.english {
+        padding-top: 12px;
+        font-family: Ubuntu;
+        font-size: 1.7rem;
         @media (min-width: 600px) {
             padding-top: 15px;
             font-family: Ubuntu;
@@ -187,28 +196,34 @@ export const Flashcard_Back = styled(Flashcard_Content)`
 `;
 
 export const FlashcardNumber = styled.section`
-    padding-top: 11px;
+    padding-top: 17px;
     text-align: center;
     font-family: Ubuntu, sans-serif;
     font-size: 1/1rem;
     color: darkgray;
+    @media (min-width: 600px) {
+        padding-top: 11px;
+    }
 `;
 
 export const NavigationPanel = styled.section`
     display: flex;
-    width: 445px;
+    margin-top: 33px;
+    margin-left: 53px;
     height: 40px;
-    margin-top: 18px;
-    margin-left: 55px;
+    @media (min-width: 600px) {
+        width: 445px;
+        margin-top: 18px;
+        margin-left: 55px;
+    }
 `;
 
 export const NavigationButton = styled.div<INavigationButtonProps>`
     display: flex;
-    width: 220px;
+    width: 145px;
     height: 40px;
     align-items: center;
     justify-content: center;
-    text-align: center;
     border-radius: 5px;
     font-family: "Noto Sans SC";
     font-weight: 700;
@@ -230,10 +245,14 @@ export const NavigationButton = styled.div<INavigationButtonProps>`
             `;
         }
     }};
+    @media (min-width: 600px) {
+        width: 220px;
+    }
 `;
 
 export const Spacer = styled.div`
     flex-grow: 1;
+    min-width: 5px;
 `;
 
 export const FlashcardText = styled.p`

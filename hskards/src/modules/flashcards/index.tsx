@@ -161,7 +161,12 @@ export const FlashcardApp = ({ deck }: any) => {
                         >
                             拼音
                         </ButtonPinyin>
-                        <ButtonEnglish onClick={modeEnglish}>EN</ButtonEnglish>
+                        <ButtonEnglish
+                            disabled={modeDisabled.english}
+                            onClick={modeEnglish}
+                        >
+                            EN
+                        </ButtonEnglish>
                         <ButtonSettings>
                             <MdSettings></MdSettings>
                         </ButtonSettings>
