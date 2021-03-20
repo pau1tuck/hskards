@@ -12,6 +12,7 @@ import {
     Flashcard_Inner,
     Flashcard_Front,
     Flashcard_Back,
+    FlashcardNumber,
     NavigationPanel,
     NavigationButton,
     Spacer,
@@ -53,12 +54,14 @@ export const FlashcardApp = ({ deck }: any) => {
         fontSize: "3.3rem",
     });
 
+    const [flipCard, triggerFlipCard] = useState(false);
+
     // Get settings
 
     // Settings
     const [startMode, setStartMode] = useState("simplified");
 
-    const [flashcardStyle, setFlashcardStyle] = useState(startMode);
+    const [flashcardStyle, setFlashcardStyle] = useState("simplified");
 
     // Initialize button enabled/disabled states
     const [modeDisabled, setModeDisabled] = useState({
@@ -74,6 +77,8 @@ export const FlashcardApp = ({ deck }: any) => {
     // Handle mode buttons
     const modeSimplified = () => {
         if (!modeDisabled.simplified) {
+            triggerFlipCard(!flipCard);
+            setFlashcardStyle("simplified");
             setCardContent(deck[currentCardNumber].simplified);
             setModeDisabled({
                 simplified: true,
@@ -84,6 +89,8 @@ export const FlashcardApp = ({ deck }: any) => {
     };
     const modePinyin = () => {
         if (!modeDisabled.pinyin) {
+            triggerFlipCard(!flipCard);
+            setFlashcardStyle("pinyin");
             setCardContent(deck[currentCardNumber].pinyin);
             setModeDisabled({
                 simplified: false,
@@ -93,12 +100,16 @@ export const FlashcardApp = ({ deck }: any) => {
         }
     };
     const modeEnglish = () => {
-        setCardContent(deck[currentCardNumber].english);
-        setStyle({
-            paddingTop: "15px",
-            fontFamily: "Ubuntu",
-            fontSize: "2.4rem",
-        });
+        if (!modeDisabled.english) {
+            triggerFlipCard(!flipCard);
+            setFlashcardStyle("english");
+            setCardContent(deck[currentCardNumber].english);
+            setModeDisabled({
+                simplified: false,
+                pinyin: false,
+                english: true,
+            });
+        }
     };
 
     // Handle navigation buttons
@@ -108,9 +119,9 @@ export const FlashcardApp = ({ deck }: any) => {
         }
     };
     const cardBack = () => {
-        currentCardNumber != 0
-            ? setCurrentCardNumber(currentCardNumber - 1)
-            : null;
+        if (currentCardNumber != 0) {
+            setCurrentCardNumber(currentCardNumber - 1);
+        }
     };
 
     // Handle card change (re-render component)
@@ -122,7 +133,13 @@ export const FlashcardApp = ({ deck }: any) => {
         } else {
             setNavigationDisabled({ buttonBack: false, buttonForward: false });
         }
+        setFlashcardStyle("simplified");
         setCardContent(deck[currentCardNumber].simplified);
+        setModeDisabled({
+            simplified: true,
+            pinyin: false,
+            english: false,
+        });
     }, [currentCardNumber]);
 
     return (
@@ -138,21 +155,26 @@ export const FlashcardApp = ({ deck }: any) => {
                         >
                             汉字
                         </ButtonSimplified>
-                        <ButtonPinyin onClick={modePinyin}>拼音</ButtonPinyin>
+                        <ButtonPinyin
+                            disabled={modeDisabled.pinyin}
+                            onClick={modePinyin}
+                        >
+                            拼音
+                        </ButtonPinyin>
                         <ButtonEnglish onClick={modeEnglish}>EN</ButtonEnglish>
                         <ButtonSettings>
                             <MdSettings></MdSettings>
                         </ButtonSettings>
+                        <FlashcardNumber>
+                            {currentCardNumber + 1}/{data.length}
+                        </FlashcardNumber>
                     </ControlPanel>
                     <Flashcard>
-                        <Flashcard_Inner>
-                            <Flashcard_Front
-                                className={flashcardStyle}
-                                style={style}
-                            >
+                        <Flashcard_Inner className={flipCard ? "flip" : ""}>
+                            <Flashcard_Front className={flashcardStyle}>
                                 {cardContent}
                             </Flashcard_Front>
-                            <Flashcard_Back style={style}>
+                            <Flashcard_Back className={flashcardStyle}>
                                 {cardContent}
                             </Flashcard_Back>
                         </Flashcard_Inner>

@@ -69,6 +69,17 @@ export const ControlPanelButton = styled.div<IControlPanelButtonProps>`
             background-color: none;
         }
     }
+    ${(props) => {
+        if (props.disabled) {
+            return `
+                opacity: 0.2;
+                cursor: default;
+                &:hover {
+                    background-color: none;
+                }
+            `;
+        }
+    }};
 `;
 
 export const ButtonSimplified = styled(ControlPanelButton)`
@@ -108,12 +119,15 @@ export const ButtonSettings = styled(ControlPanelButton)`
 
 export const Flashcard = styled.section`
     width: 100%;
-    height: 200px;
+    height: 225px;
+    background-color: transparent;
+    perspective: 1000px;
+    &.swipe {
+        overflow: hidden;
+    }
     @media (min-width: 600px) {
         height: 260px;
     }
-    background-color: transparent;
-    perspective: 1000px;
 `;
 
 export const Flashcard_Inner = styled.section`
@@ -124,7 +138,7 @@ export const Flashcard_Inner = styled.section`
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    &:hover {
+    &.flip {
         transform: rotateX(180deg);
     }
 `;
@@ -146,31 +160,38 @@ const Flashcard_Content = styled.section`
     color: #202020;
     &.simplified {
         @media (min-width: 600px) {
-            padding-top: "10px";
+            padding-top: 10px;
             font-family: "Noto Sans SC";
-            font-size: "3.3rem";
+            font-size: 3.3rem;
         }
     }
     &.pinyin {
         @media (min-width: 600px) {
-            padding-top: "10px";
-            font-family: "sans-serif";
-            font-size: "2.4rem";
+            padding-top: 10px;
+            font-family: sans-serif;
+            font-size: 2.4rem;
+        }
+    }
+    &.english {
+        @media (min-width: 600px) {
+            padding-top: 15px;
+            font-family: Ubuntu;
+            font-size: 2.4rem;
         }
     }
 `;
 
-export const Flashcard_Front = styled(Flashcard_Content)<IFlashcardProps>`
-    padding-top: ${(props) => props.style.paddingTop || "0"};
-    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
-    font-size: ${(props) => props.style.fontSize};
+export const Flashcard_Front = styled(Flashcard_Content)``;
+export const Flashcard_Back = styled(Flashcard_Content)`
+    transform: rotateX(180deg);
 `;
 
-export const Flashcard_Back = styled(Flashcard_Content)<IFlashcardProps>`
-    padding-top: ${(props) => props.style.paddingTop || "0"};
-    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
-    font-size: ${(props) => props.style.fontSize};
-    transform: rotateX(180deg);
+export const FlashcardNumber = styled.section`
+    padding-top: 11px;
+    text-align: center;
+    font-family: Ubuntu, sans-serif;
+    font-size: 1/1rem;
+    color: darkgray;
 `;
 
 export const NavigationPanel = styled.section`

@@ -33764,6 +33764,17 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             background-color: none;
         }
     }
+    ${(props) => {
+    if (props.disabled) {
+      return `
+                opacity: 0.2;
+                cursor: default;
+                &:hover {
+                    background-color: none;
+                }
+            `;
+    }
+  }};
 `;
   var ButtonSimplified = styled_components_browser_esm_default(ControlPanelButton)`
     background-color: #005089;
@@ -33798,12 +33809,15 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 `;
   var Flashcard = styled_components_browser_esm_default.section`
     width: 100%;
-    height: 200px;
+    height: 225px;
+    background-color: transparent;
+    perspective: 1000px;
+    &.swipe {
+        overflow: hidden;
+    }
     @media (min-width: 600px) {
         height: 260px;
     }
-    background-color: transparent;
-    perspective: 1000px;
 `;
   var Flashcard_Inner = styled_components_browser_esm_default.section`
     position: relative;
@@ -33813,7 +33827,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    &:hover {
+    &.flip {
         transform: rotateX(180deg);
     }
 `;
@@ -33834,29 +33848,36 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     color: #202020;
     &.simplified {
         @media (min-width: 600px) {
-            padding-top: "10px";
+            padding-top: 10px;
             font-family: "Noto Sans SC";
-            font-size: "3.3rem";
+            font-size: 3.3rem;
         }
     }
     &.pinyin {
         @media (min-width: 600px) {
-            padding-top: "10px";
-            font-family: "sans-serif";
-            font-size: "2.4rem";
+            padding-top: 10px;
+            font-family: sans-serif;
+            font-size: 2.4rem;
+        }
+    }
+    &.english {
+        @media (min-width: 600px) {
+            padding-top: 15px;
+            font-family: Ubuntu;
+            font-size: 2.4rem;
         }
     }
 `;
-  var Flashcard_Front = styled_components_browser_esm_default(Flashcard_Content)`
-    padding-top: ${(props) => props.style.paddingTop || "0"};
-    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
-    font-size: ${(props) => props.style.fontSize};
-`;
+  var Flashcard_Front = styled_components_browser_esm_default(Flashcard_Content)``;
   var Flashcard_Back = styled_components_browser_esm_default(Flashcard_Content)`
-    padding-top: ${(props) => props.style.paddingTop || "0"};
-    font-family: ${(props) => props.style.fontFamily || "sans-serif"};
-    font-size: ${(props) => props.style.fontSize};
     transform: rotateX(180deg);
+`;
+  var FlashcardNumber = styled_components_browser_esm_default.section`
+    padding-top: 11px;
+    text-align: center;
+    font-family: Ubuntu, sans-serif;
+    font-size: 1/1rem;
+    color: darkgray;
 `;
   var NavigationPanel = styled_components_browser_esm_default.section`
     display: flex;
@@ -34072,6 +34093,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       fontFamily: "Noto Sans SC",
       fontSize: "3.3rem"
     });
+    const [flipCard, triggerFlipCard] = (0, import_react12.useState)(false);
+    const [startMode, setStartMode] = (0, import_react12.useState)("simplified");
+    const [flashcardStyle, setFlashcardStyle] = (0, import_react12.useState)("simplified");
     const [modeDisabled, setModeDisabled] = (0, import_react12.useState)({
       simplified: true,
       pinyin: false,
@@ -34081,29 +34105,41 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       buttonBack: true,
       buttonForward: false
     });
-    const [startMode, setStartMode] = (0, import_react12.useState)("simplified");
-    const [flashcardStyle, setFlashcardStyle] = (0, import_react12.useState)(startMode);
     const modeSimplified = () => {
       if (!modeDisabled.simplified) {
+        triggerFlipCard(!flipCard);
+        setFlashcardStyle("simplified");
         setCardContent(deck[currentCardNumber].simplified);
-        setModeDisabled((prevState) => {
-          return {
-            ...prevState,
-            simplified: true
-          };
+        setModeDisabled({
+          simplified: true,
+          pinyin: false,
+          english: false
         });
       }
     };
     const modePinyin = () => {
-      setCardContent(deck[currentCardNumber].pinyin);
+      if (!modeDisabled.pinyin) {
+        triggerFlipCard(!flipCard);
+        setFlashcardStyle("pinyin");
+        setCardContent(deck[currentCardNumber].pinyin);
+        setModeDisabled({
+          simplified: false,
+          pinyin: true,
+          english: false
+        });
+      }
     };
     const modeEnglish = () => {
-      setCardContent(deck[currentCardNumber].english);
-      setStyle({
-        paddingTop: "15px",
-        fontFamily: "Ubuntu",
-        fontSize: "2.4rem"
-      });
+      if (!modeDisabled.english) {
+        triggerFlipCard(!flipCard);
+        setFlashcardStyle("english");
+        setCardContent(deck[currentCardNumber].english);
+        setModeDisabled({
+          simplified: false,
+          pinyin: false,
+          english: true
+        });
+      }
     };
     const cardForward = () => {
       if (currentCardNumber < deck.length - 1) {
@@ -34111,7 +34147,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       }
     };
     const cardBack = () => {
-      currentCardNumber != 0 ? setCurrentCardNumber(currentCardNumber - 1) : null;
+      if (currentCardNumber != 0) {
+        setCurrentCardNumber(currentCardNumber - 1);
+      }
     };
     (0, import_react12.useEffect)(() => {
       if (currentCardNumber === 0) {
@@ -34121,20 +34159,28 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       } else {
         setNavigationDisabled({buttonBack: false, buttonForward: false});
       }
+      setFlashcardStyle("simplified");
       setCardContent(deck[currentCardNumber].simplified);
+      setModeDisabled({
+        simplified: true,
+        pinyin: false,
+        english: false
+      });
     }, [currentCardNumber]);
     return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(AppContainer, null, /* @__PURE__ */ import_react12.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react12.default.createElement(ButtonSimplified, {
       className: modeDisabled.simplified ? "disabled" : "",
       onClick: modeSimplified
     }, "\u6C49\u5B57"), /* @__PURE__ */ import_react12.default.createElement(ButtonPinyin, {
+      disabled: modeDisabled.pinyin,
       onClick: modePinyin
     }, "\u62FC\u97F3"), /* @__PURE__ */ import_react12.default.createElement(ButtonEnglish, {
       onClick: modeEnglish
-    }, "EN"), /* @__PURE__ */ import_react12.default.createElement(ButtonSettings, null, /* @__PURE__ */ import_react12.default.createElement(MdSettings, null))), /* @__PURE__ */ import_react12.default.createElement(Flashcard, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Inner, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Front, {
-      className: flashcardStyle,
-      style
+    }, "EN"), /* @__PURE__ */ import_react12.default.createElement(ButtonSettings, null, /* @__PURE__ */ import_react12.default.createElement(MdSettings, null)), /* @__PURE__ */ import_react12.default.createElement(FlashcardNumber, null, currentCardNumber + 1, "/", data.length)), /* @__PURE__ */ import_react12.default.createElement(Flashcard, null, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Inner, {
+      className: flipCard ? "flip" : ""
+    }, /* @__PURE__ */ import_react12.default.createElement(Flashcard_Front, {
+      className: flashcardStyle
     }, cardContent), /* @__PURE__ */ import_react12.default.createElement(Flashcard_Back, {
-      style
+      className: flashcardStyle
     }, cardContent))))), /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(NavigationPanel, null, /* @__PURE__ */ import_react12.default.createElement(NavigationButton, {
       disabled: navigationDisabled.buttonBack,
       onClick: cardBack
