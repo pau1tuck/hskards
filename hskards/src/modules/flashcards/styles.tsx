@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-interface IFlashcardProps {
-    readonly style: {
-        paddingTop?: string;
-        fontFamily: string;
-        fontSize: string;
-    };
-}
-
 interface IControlPanelButtonProps {
     readonly disabled?: boolean;
 }
@@ -169,7 +161,7 @@ const Flashcard_Content = styled.section`
         }
     }
     &.pinyin {
-        padding-top: 17px;
+        padding-top: 19px;
         font-family: sans-serif;
         font-size: 1.7rem;
         @media (min-width: 600px) {

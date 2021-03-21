@@ -130,7 +130,6 @@ CACHEOPS_REDIS = {
     'password': config('REDIS_PASS'),
     # 'unix_socket_path': ''  # replaces host and port
 }
-CACHEOPS_PREFIX = 'hskit_app'
 CACHEOPS_DEGRADE_ON_FAILURE = True
 CACHEOPS = {
     'auth.user': {'ops': 'get', 'timeout': 60*15},

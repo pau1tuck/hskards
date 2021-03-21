@@ -19,5 +19,4 @@ class Vocabulary(models.Model):
 
 class Vocabulary_Group(models.Model):
     lesson_id = models.IntegerField()
-    character = models.ForeignKey(
-        Vocabulary, on_delete=models.CASCADE)
+    character = models.ManyToManyField(Vocabulary)

@@ -13,9 +13,5 @@ class VocabularyAdmin(admin.ModelAdmin):
     search_fields = (['simplified_chinese', 'english'])
 
 
-class VocabularyGroupAdmin(admin.ModelAdmin):
-    list_display = ('lesson_id', 'character')
-
-
 admin.site.register(Vocabulary, VocabularyAdmin)
-admin.site.register(Vocabulary_Group, VocabularyGroupAdmin)
+admin.site.register(Vocabulary_Group)
