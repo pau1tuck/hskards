@@ -3,7 +3,7 @@ import { Flashcards } from "../modules/flashcards";
 export const ROUTES = [
     {
         name: "Flashcards",
-        path: "/flashcards",
+        path: "/:id/flashcards",
         component: Flashcards,
         // routes: "",
     },
