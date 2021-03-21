@@ -33825,7 +33825,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     height: 100%;
     margin-right: 10px;
     text-align: center;
-    transition: transform 0.6s;
+    transition: transform 0.3s;
     transform-style: preserve-3d;
     &.flip {
         transform: rotateX(180deg);
@@ -33857,7 +33857,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
     }
     &.pinyin {
-        padding-top: 15px;
+        padding-top: 17px;
         font-family: sans-serif;
         font-size: 1.7rem;
         @media (min-width: 600px) {
@@ -33867,8 +33867,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
     }
     &.english {
-        padding-top: 12px;
-        font-family: Ubuntu;
+        padding-top: 10px;
+        font-family: "Ubuntu";
         font-size: 1.7rem;
         @media (min-width: 600px) {
             padding-top: 15px;
@@ -33939,6 +33939,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 `;
   var FlashcardText = styled_components_browser_esm_default.p`
     flex-grow: 1;
+`;
+  var Audio = styled_components_browser_esm_default.audio`
+    visibility: hidden;
 `;
 
   // node_modules/react-icons/lib/esm/iconBase.js
@@ -34107,13 +34110,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     const [currentMode, setCurrentMode] = (0, import_react12.useState)("simplified");
     const [currentCardNumber, setCurrentCardNumber] = (0, import_react12.useState)(0);
     const [cardContent, setCardContent] = (0, import_react12.useState)(deck[currentCardNumber].simplified);
-    const [style, setStyle] = (0, import_react12.useState)({
-      paddingTop: "10px",
-      fontFamily: "Noto Sans SC",
-      fontSize: "3.3rem"
-    });
     const [flipCard, triggerFlipCard] = (0, import_react12.useState)(false);
+    let audioZH = "/static/core/audio/40101/" + deck[currentCardNumber].simplified + ".mp3";
+    const [audioChinese, setAudioChinese] = (0, import_react12.useState)("");
     const [startMode, setStartMode] = (0, import_react12.useState)("simplified");
+    const [autoplay, setAutoplay] = (0, import_react12.useState)(false);
     const [flashcardStyle, setFlashcardStyle] = (0, import_react12.useState)("simplified");
     const [modeDisabled, setModeDisabled] = (0, import_react12.useState)({
       simplified: true,
@@ -34124,11 +34125,16 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       buttonBack: true,
       buttonForward: false
     });
+    const setAudio = () => {
+      audioZH = "/static/core/audio/40101/" + deck[currentCardNumber].simplified + ".mp3";
+      setAudioChinese("");
+    };
     const modeSimplified = () => {
       if (!modeDisabled.simplified) {
         triggerFlipCard(!flipCard);
         setFlashcardStyle("simplified");
         setCardContent(deck[currentCardNumber].simplified);
+        setAudio();
         setModeDisabled({
           simplified: true,
           pinyin: false,
@@ -34163,11 +34169,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     const cardForward = () => {
       if (currentCardNumber < deck.length - 1) {
         setCurrentCardNumber(currentCardNumber + 1);
+        setAudio();
       }
     };
     const cardBack = () => {
       if (currentCardNumber != 0) {
         setCurrentCardNumber(currentCardNumber - 1);
+        setAudio();
       }
     };
     (0, import_react12.useEffect)(() => {
@@ -34186,6 +34194,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         english: false
       });
     }, [currentCardNumber]);
+    (0, import_react12.useEffect)(() => {
+      setAudioChinese(audioZH);
+    }, [audioChinese]);
+    (0, import_react12.useEffect)(() => {
+      setAutoplay(true);
+    }, []);
     return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement(Container, null, /* @__PURE__ */ import_react12.default.createElement(AppContainer, null, /* @__PURE__ */ import_react12.default.createElement(ControlPanel, null, /* @__PURE__ */ import_react12.default.createElement(ButtonSimplified, {
       className: modeDisabled.simplified ? "disabled" : "",
       onClick: modeSimplified
@@ -34207,7 +34221,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }, "\u4E0A"), /* @__PURE__ */ import_react12.default.createElement(Spacer, null), /* @__PURE__ */ import_react12.default.createElement(NavigationButton, {
       disabled: navigationDisabled.buttonForward,
       onClick: cardForward
-    }, "\u4E0B"))));
+    }, "\u4E0B"))), /* @__PURE__ */ import_react12.default.createElement("audio", {
+      autoPlay: true,
+      src: audioChinese
+    }));
   };
 
   // src/config/routes.tsx

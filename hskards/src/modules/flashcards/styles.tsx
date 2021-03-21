@@ -136,7 +136,7 @@ export const Flashcard_Inner = styled.section`
     height: 100%;
     margin-right: 10px;
     text-align: center;
-    transition: transform 0.6s;
+    transition: transform 0.3s;
     transform-style: preserve-3d;
     &.flip {
         transform: rotateX(180deg);
@@ -169,7 +169,7 @@ const Flashcard_Content = styled.section`
         }
     }
     &.pinyin {
-        padding-top: 15px;
+        padding-top: 17px;
         font-family: sans-serif;
         font-size: 1.7rem;
         @media (min-width: 600px) {
@@ -179,8 +179,8 @@ const Flashcard_Content = styled.section`
         }
     }
     &.english {
-        padding-top: 12px;
-        font-family: Ubuntu;
+        padding-top: 10px;
+        font-family: "Ubuntu";
         font-size: 1.7rem;
         @media (min-width: 600px) {
             padding-top: 15px;
@@ -257,4 +257,8 @@ export const Spacer = styled.div`
 
 export const FlashcardText = styled.p`
     flex-grow: 1;
+`;
+
+export const Audio = styled.audio`
+    visibility: hidden;
 `;

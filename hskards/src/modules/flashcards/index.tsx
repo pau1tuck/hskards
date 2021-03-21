@@ -48,18 +48,19 @@ export const FlashcardApp = ({ deck }: any) => {
     const [cardContent, setCardContent] = useState(
         deck[currentCardNumber].simplified
     );
-    const [style, setStyle] = useState({
-        paddingTop: "10px",
-        fontFamily: "Noto Sans SC",
-        fontSize: "3.3rem",
-    });
-
     const [flipCard, triggerFlipCard] = useState(false);
+
+    let audioZH =
+        "/static/core/audio/40101/" +
+        deck[currentCardNumber].simplified +
+        ".mp3";
+    const [audioChinese, setAudioChinese] = useState("");
 
     // Get settings
 
     // Settings
     const [startMode, setStartMode] = useState("simplified");
+    const [autoplay, setAutoplay] = useState(false);
 
     const [flashcardStyle, setFlashcardStyle] = useState("simplified");
 
@@ -74,12 +75,21 @@ export const FlashcardApp = ({ deck }: any) => {
         buttonForward: false,
     });
 
+    const setAudio = () => {
+        audioZH =
+            "/static/core/audio/40101/" +
+            deck[currentCardNumber].simplified +
+            ".mp3";
+        setAudioChinese("");
+    };
+
     // Handle mode buttons
     const modeSimplified = () => {
         if (!modeDisabled.simplified) {
             triggerFlipCard(!flipCard);
             setFlashcardStyle("simplified");
             setCardContent(deck[currentCardNumber].simplified);
+            setAudio();
             setModeDisabled({
                 simplified: true,
                 pinyin: false,
@@ -116,11 +126,13 @@ export const FlashcardApp = ({ deck }: any) => {
     const cardForward = () => {
         if (currentCardNumber < deck.length - 1) {
             setCurrentCardNumber(currentCardNumber + 1);
+            setAudio();
         }
     };
     const cardBack = () => {
         if (currentCardNumber != 0) {
             setCurrentCardNumber(currentCardNumber - 1);
+            setAudio();
         }
     };
 
@@ -141,6 +153,14 @@ export const FlashcardApp = ({ deck }: any) => {
             english: false,
         });
     }, [currentCardNumber]);
+
+    useEffect(() => {
+        setAudioChinese(audioZH);
+    }, [audioChinese]);
+
+    useEffect(() => {
+        setAutoplay(true);
+    }, []);
 
     return (
         <div>
@@ -203,6 +223,7 @@ export const FlashcardApp = ({ deck }: any) => {
                     </NavigationButton>
                 </NavigationPanel>
             </Container>
+            <audio autoPlay src={audioChinese} />
         </div>
     );
 };

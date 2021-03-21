@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "react-audio-player": "^0.14.0"
+  },
+  "devDependencies": {
+    "@types/react-audio-player": "^0.11.0"
+  }
+}
