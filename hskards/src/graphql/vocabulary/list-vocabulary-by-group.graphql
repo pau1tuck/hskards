@@ -1,6 +1,5 @@
-query ListVocabularyByGroup($id: Number!) {
-    vocabularyGroup(id: $id) {
-        id
+query ListVocabularyByGroup($id: Int!) {
+    vocabularyGroup(lessonId: $id) {
         lessonId
         character {
             simplifiedChinese
